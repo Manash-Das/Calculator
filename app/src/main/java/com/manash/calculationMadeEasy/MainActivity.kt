@@ -1,9 +1,10 @@
-package com.manash.calculationmadeeasy
+package com.manash.calculationMadeEasy
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
@@ -17,12 +18,17 @@ class MainActivity : AppCompatActivity() {
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=input_text.selectionStart                            //cursor position
         input_text.setText(input_text.text.insert(cursorPos,txtToAdd).toString())
-        input_text.setSelection(cursorPos+1)
+        input_text.setSelection(cursorPos+txtToAdd.length)
     }
     private fun updateTrig(trigToAdd:String){
         val cursorPos: Int=input_text.selectionStart
-        input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
-        input_text.setSelection(cursorPos+4)
+        if (trigToAdd=="pi"){
+            input_text.setText(input_text.text.insert(cursorPos,trigToAdd).toString())
+        }
+        else{
+            input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
+        }
+        input_text.setSelection(cursorPos+trigToAdd.length)
     }
     private fun updateOperator(oprToAdd:String){
         val cursorPos:Int=input_text.selectionStart
@@ -73,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
         val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
-        if(leftStr.takeLast(4)=="sin(" || leftStr.takeLast(4)=="cos(" || leftStr.takeLast(4)=="tan(" ){
+        if(leftStr.takeLast(4)=="sin(" || leftStr.takeLast(4)=="cos(" || leftStr.takeLast(4)=="tan(" || leftStr.takeLast(2)=="pi" || leftStr.takeLast(3)=="ans"){
             input_text.setText(String.format("%s%s",leftStr.dropLast(4),rightStr))
             return
         }
@@ -86,30 +92,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun equalBTN(@Suppress("UNUSED_PARAMETER")view: View) {
-        val userExp:String=input_text.text.toString()
-        if(userExp.isEmpty()){
-            return
-        }
+        var userExp:String=input_text.text.toString()
+        if(userExp.isEmpty()){ return }
+        var result ="0"
+        userExp=userExp.replace("ans",result,false)
         val exp=Expression(userExp)
-        val result:String=exp.calculate().toString()
-        if(result=="NaN"){
-            answer_box.setText(getString(R.string.Error))
-        }
-        else {
-            answer_box.setText(result)
-        }
+        result=exp.calculate().toString()
+        if(result=="NaN"){ answer_box.setText(getString(R.string.Error)) }
+        else { answer_box.setText(result) }
     }
-    fun sin(@Suppress("UNUSED_PARAMETER")view: View) {
-        updateTrig("sin")
-    }
-    fun cos(@Suppress("UNUSED_PARAMETER")view: View) {
-        updateTrig("cos")
-    }
-    fun tan(@Suppress("UNUSED_PARAMETER")view: View){
-        updateTrig("tan")
-    }
+    fun sin(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("sin") }
+    fun cos(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("cos") }
+    fun tan(@Suppress("UNUSED_PARAMETER")view: View){ updateTrig("tan") }
     fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
         return
     }
+    fun pie(view: View) {
+        updateText("pi")
+    }
+    fun ans(view: View) {
+        Toast.makeText(applicationContext,"under working",Toast.LENGTH_LONG).show()
+        updateText("")
+    }
+    fun percent(view: View) { updateText("%") }
 }
 

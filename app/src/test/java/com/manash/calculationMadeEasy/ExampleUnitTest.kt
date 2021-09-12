@@ -1,4 +1,4 @@
-package com.manash.calculationmadeeasy
+package com.manash.calculationMadeEasy
 
 import org.junit.Test
 

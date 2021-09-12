@@ -35,4 +35,6 @@
     <string name="sine">sin</string>
     <string name="cosine">cos</string>
     <string name="tangent">tan</string>
+    <string name="Ans">Ans</string>
+    <string name="percent">%</string>
 </resources>

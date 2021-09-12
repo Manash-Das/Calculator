@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.manash.calculationmadeeasy">
+    package="com.manash.calculationMadeEasy">
 
     <application
         android:fullBackupOnly="true"
@@ -12,7 +12,7 @@
         android:theme="@style/Theme.CalculationMadeEasy"
         android:allowBackup="true">
         <activity
-            android:name=".MainActivity"
+            android:name="com.manash.calculationMadeEasy.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
