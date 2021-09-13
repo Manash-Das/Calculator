@@ -79,8 +79,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
         val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
-        if(leftStr.takeLast(4)=="sin(" || leftStr.takeLast(4)=="cos(" || leftStr.takeLast(4)=="tan(" || leftStr.takeLast(2)=="pi" || leftStr.takeLast(3)=="ans"){
+        if(leftStr.takeLast(4)=="sin(" || leftStr.takeLast(4)=="cos(" || leftStr.takeLast(4)=="tan("){
             input_text.setText(String.format("%s%s",leftStr.dropLast(4),rightStr))
+            return
+        }
+        if(leftStr.takeLast(2)=="pi") {
+            input_text.setText(String.format("%s%s", leftStr.dropLast(4), rightStr))
+            return
+        }
+        if(leftStr.takeLast(3)=="ans"){
+            input_text.setText(String.format("%s%s",leftStr.dropLast(3),rightStr))
             return
         }
         input_text.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
