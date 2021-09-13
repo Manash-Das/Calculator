@@ -10,14 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="10"
+        app:layout_constraintVertical_bias="1"
         android:layout_marginTop="10dp"
+        android:baselineAligned="false"
         app:layout_constraintTop_toBottomOf="@id/answer_box">
     <TableLayout
         android:id="@+id/table"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_height="fill_parent"
+        android:layout_width="0dp"
+        tools:ignore="UselessParent">
 
         <TableRow
             android:layout_width="match_parent"
@@ -341,6 +343,7 @@
         <TableRow
             android:id="@+id/tableRow"
             android:layout_height="60dp"
+            android:layout_marginStart="7dp"
             android:layout_width="0dp">
 
             <ImageButton
@@ -350,13 +353,14 @@
                 android:layout_height="60dp"
                 android:layout_marginEnd="7dp"
                 android:layout_marginBottom="7dp"
-                android:scaleType="centerCrop"
                 android:layout_weight="1"
+                android:background="@drawable/circle"
                 android:backgroundTint="@color/white"
+                android:contentDescription="@string/pie"
                 android:onClick="pie"
+                android:scaleType="fitCenter"
                 android:src="@drawable/pie"
-                android:textColor="@color/white"
-                android:background="@drawable/circle" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/cosine"
