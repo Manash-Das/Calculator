@@ -1,6 +1,7 @@
 package com.manash.calculationMadeEasy
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -113,7 +114,8 @@ class MainActivity : AppCompatActivity() {
     fun cos(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("cos") }
     fun tan(@Suppress("UNUSED_PARAMETER")view: View){ updateTrig("tan") }
     fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
-        return
+        val intent=Intent(this,ComplexNumberActivity::class.java)
+        startActivity(intent)
     }
     fun pie(view: View) {
         updateText("pi")

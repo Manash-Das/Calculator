@@ -23,7 +23,7 @@
     <string name="multiply">*</string>
     <string name="divide">/</string>
 
-    <string name="clear">clr</string>
+    <string name="clear">C</string>
     <string name="open_bracket">(</string>
     <string name="backspace">x</string>
     <string name="close_bracket">)</string>
@@ -38,4 +38,13 @@
     <string name="Ans">Ans</string>
     <string name="percent">%</string>
     <string name="pie">pie</string>
+    <string name="imaginary">j</string>
+    <string name="polar">pol(</string>
+    <string name="rectangular_form">rect</string>
+    <string name="absolute">abs</string>
+    <string name="argument">arg</string>
+    <string name="conjugate">conj(</string>
+    <string name="Modes">Mode</string>
+    <string name="comma">,</string>
+    <string name="complexMode">Complex Mode</string>
 </resources>

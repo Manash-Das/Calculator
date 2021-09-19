@@ -4,15 +4,20 @@
     package="com.manash.calculationMadeEasy">
 
     <application
+        android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CalculationMadeEasy"
-        android:allowBackup="true">
+        android:theme="@style/Theme.CalculationMadeEasy">
         <activity
-            android:name="com.manash.calculationMadeEasy.MainActivity"
+            android:name=".ComplexNumberActivity"
+            android:label="Complex Mode"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
+            android:label="calculation made easy"
             android:exported="true"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">

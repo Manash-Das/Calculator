@@ -6,16 +6,11 @@ plugins {
 
 android {
     compileSdk 31
-    sourceSets {
-        main {
-            python.srcDir "src/main/python"
-        }
-    }
     defaultConfig {
         applicationId "com.manash.calculationmadeeasy"
-        python{
-            pip{
-                install "cmath"
+        sourceSets {
+            main {
+                python.srcDir "src/main/python"
             }
         }
         minSdk 23
@@ -26,7 +21,7 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        python {
+        python{
             buildPython "C:/Users/MANASH DAS/AppData/Local/Programs/Python/Python39/python.exe"
         }
     }
@@ -48,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     apply plugin: 'com.android.application'
     implementation files('libs/MathParser.org-mXparser-v.4.4.0-jdk11.jar')
     apply plugin: 'kotlin-android'
