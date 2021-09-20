@@ -40,7 +40,7 @@
     <string name="pie">pie</string>
     <string name="imaginary">j</string>
     <string name="polar">pol(</string>
-    <string name="rectangular_form">rect</string>
+    <string name="rectangular_form">rect(</string>
     <string name="absolute">abs</string>
     <string name="argument">arg</string>
     <string name="conjugate">conj(</string>

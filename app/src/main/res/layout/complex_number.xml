@@ -339,7 +339,7 @@
                 android:text="@string/polar"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/percentage"
@@ -353,7 +353,7 @@
                 android:text="@string/rectangular_form"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/conjugate"
@@ -366,7 +366,7 @@
                 android:text="@string/conjugate"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
         </TableRow>
 
         <TableRow
@@ -384,7 +384,7 @@
                 android:text="@string/absolute"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/argument"
@@ -398,7 +398,7 @@
                 android:text="@string/argument"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/comma"
@@ -410,7 +410,6 @@
                 android:background="@drawable/circle"
                 android:onClick="comma"
                 android:text="@string/comma"
-                android:padding="5dp"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
 
