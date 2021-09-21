@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.chaquo.python.PyObject
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
@@ -54,7 +57,7 @@ class ComplexNumberActivity : AppCompatActivity() {
     fun pointBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText(".") }
     fun openBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("(") }
     fun closeBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText(")") }
-    fun powerBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("^") }
+    fun powerBTN(@Suppress("UNUSED_PARAMETER")view: View) { return }
     fun plusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("+") }
     fun minusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("-") }
     fun multiplyBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("*")}
@@ -109,9 +112,21 @@ class ComplexNumberActivity : AppCompatActivity() {
             }
         }
         Log.d("equal_function userExp :",userExp)
-        answer_box.setText(mathematics(userExp))
+        answer_box.setText(mathematicsPython(userExp))
 
     }
+    fun imaginary(@Suppress("UNUSED_PARAMETER")view: View) { updateText("j") }
+    fun polar(@Suppress("UNUSED_PARAMETER")view: View) { updateText("pol(") }
+    fun rectangular(@Suppress("UNUSED_PARAMETER")view: View) { updateText("rect(") }
+    fun absolute(@Suppress("UNUSED_PARAMETER")view: View) { updateText("abs(") }
+    fun argument(@Suppress("UNUSED_PARAMETER")view: View) { updateText("arg(") }
+    fun conjugate(@Suppress("UNUSED_PARAMETER")view: View) { updateText("conj(") }
+    fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
+        input_text.setText("")
+        intent= Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+    fun comma(@Suppress("UNUSED_PARAMETER")view: View) { updateText(",") }
     private fun function2(userExp:String):String{
         var r=""
         var angle=""
@@ -137,20 +152,9 @@ class ComplexNumberActivity : AppCompatActivity() {
         Log.d("final check a",r)
         Log.d("final check b",angle)
 
-        val x=mathematics("$r*cos($angle)")
-        val y= mathematics("$r*sin($angle)")
+        val x=mathematicsModule("$r*cos($angle)")
+        val y= mathematicsModule("$r*sin($angle)")
         return "$x+($y)j"
-    }
-    fun imaginary(@Suppress("UNUSED_PARAMETER")view: View) { updateText("j") }
-    fun polar(@Suppress("UNUSED_PARAMETER")view: View) { updateText("pol(") }
-    fun rectangular(@Suppress("UNUSED_PARAMETER")view: View) { updateText("rect(") }
-    fun absolute(@Suppress("UNUSED_PARAMETER")view: View) { updateText("abs(") }
-    fun argument(@Suppress("UNUSED_PARAMETER")view: View) { updateText("arg(") }
-    fun conjugate(@Suppress("UNUSED_PARAMETER")view: View) { updateText("conj(") }
-    fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
-        input_text.setText("")
-        intent= Intent(this, MainActivity::class.java)
-        startActivity(intent)
     }
     private fun function1(sub:String, userExp:String):String{
         var a=""
@@ -185,39 +189,36 @@ class ComplexNumberActivity : AppCompatActivity() {
         Log.d("final check a",a)
         Log.d("final check b",b)
         var x: String
-        if(sub=="pol"){
-            x=mathematics("atg($b/$a)")
-            Log.d("arg = ",x)
-            val y:String=mathematics("sqrt($a*$a+$b*$b)")
-            Log.d("abs",y)
-            x="($y,$x)"
-        }
-        else if(sub=="arg"){
-            x=mathematics("atan($b/$a)")
-        }
-        else if(sub=="abs"){
-            x=mathematics("sqrt($a*$a+$b*$b)")
-        }
-        else if(sub=="conj"){
-            Log.d("flag :", flag.toString())
-            if(flag==1){
-                x="-$b"
+        when(sub) {
+            "pol" -> {
+                x = mathematicsModule("atg($b/$a)")
+                Log.d("arg = ", x)
+                val y: String = mathematicsModule("sqrt($a*$a+$b*$b)")
+                Log.d("abs", y)
+                x = "($y,$x)"
             }
-            else{
-                x="+$b"
+            "arg" -> x = mathematicsModule("atan($b/$a)")
+            "abs" -> x = mathematicsModule("sqrt($a*$a+$b*$b)")
+            "conj" -> {
+                Log.d("flag :", flag.toString())
+                x = if (flag == 1) {
+                    "-$b"
+                } else {
+                    "+$b"
+                }
+                x = "$a$x'j'"
             }
-            x="$a$x'j'"
+            else -> x = "syntax Error"
         }
-        else{
-            x="syntax Error"
-        }
-        return x
-
+            return x
     }
-    private fun mathematics(userExpression: String): String {
+    private fun mathematicsModule(userExpression: String): String {
         val exp = Expression(userExpression)
         val result= exp.calculate().toString()
         Log.d("result",result)
+        if(result=="Infinity"){
+            return result
+        }
         if(result.length>7) {
             var check=0
             var decimal=""
@@ -241,7 +242,11 @@ class ComplexNumberActivity : AppCompatActivity() {
         }
         return result
     }
-    fun comma(@Suppress("UNUSED_PARAMETER")view: View) { updateText(",") }
-
-
+    private fun mathematicsPython(userExp: String):String{
+        if(!Python.isStarted()){ Python.start(AndroidPlatform(this)) }
+        val py:Python= Python.getInstance()
+        val pyObj: PyObject =py.getModule("complex function")
+        val obj:PyObject=pyObj.callAttr("complex",userExp)
+        return obj.toString()
+    }
 }

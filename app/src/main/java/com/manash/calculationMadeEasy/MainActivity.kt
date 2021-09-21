@@ -17,19 +17,9 @@ class MainActivity : AppCompatActivity() {
     }
     @SuppressLint("SetTextI18n")
     private fun updateText(txtToAdd: String){
-        val cursorPos: Int=input_text.selectionStart                            //cursor position
+        val cursorPos: Int=input_text.selectionStart
         input_text.setText(input_text.text.insert(cursorPos,txtToAdd).toString())
         input_text.setSelection(cursorPos+txtToAdd.length)
-    }
-    private fun updateTrig(trigToAdd:String){
-        val cursorPos: Int=input_text.selectionStart
-        if (trigToAdd=="pi"){
-            input_text.setText(input_text.text.insert(cursorPos,trigToAdd).toString())
-        }
-        else{
-            input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
-        }
-        input_text.setSelection(cursorPos+trigToAdd.length)
     }
     private fun updateOperator(oprToAdd:String){
         val cursorPos:Int=input_text.selectionStart
@@ -107,23 +97,55 @@ class MainActivity : AppCompatActivity() {
         userExp=userExp.replace("ans",result,false)
         val exp=Expression(userExp)
         result=exp.calculate().toString()
-        if(result=="NaN"){ answer_box.setText(getString(R.string.Error)) }
-        else { answer_box.setText(result) }
+        if(result=="NaN"){ answer_box.setText(getString(R.string.Error)); return}
+        if(result=="Infinity"){ answer_box.setText(result); return}
+        if(result.length>7) {
+            var check=0
+            var decimal=""
+            var power=""
+            for (items in result) {
+                if (items == 'E') {
+                    check = 1
+                    power = " $power"
+
+                }
+                if (check==0) {
+                    decimal = "$decimal$items"
+                } else {
+                    power = "$power$items"
+                }
+            }
+            if(decimal.length>7) {
+                decimal = decimal.substring(0, 7)
+            }
+            result= "$decimal$power"
+        }
+        answer_box.setText(result)
     }
-    fun sin(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("sin") }
-    fun cos(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("cos") }
-    fun tan(@Suppress("UNUSED_PARAMETER")view: View){ updateTrig("tan") }
+    fun percent(@Suppress("UNUSED_PARAMETER")view: View) { updateText("%") }
     fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
         val intent=Intent(this,ComplexNumberActivity::class.java)
         startActivity(intent)
     }
-    fun pie(view: View) {
+    fun pie(@Suppress("UNUSED_PARAMETER")view: View) {
         updateText("pi")
     }
-    fun ans(view: View) {
+    fun ans(@Suppress("UNUSED_PARAMETER")view: View) {
         Toast.makeText(applicationContext,"under working",Toast.LENGTH_LONG).show()
         updateText("")
     }
-    fun percent(view: View) { updateText("%") }
+//    fun sin(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("sin") }
+//    fun cos(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("cos") }
+//    fun tan(@Suppress("UNUSED_PARAMETER")view: View){ updateTrig("tan") }
+//    private fun updateTrig(trigToAdd:String){
+//        val cursorPos: Int=input_text.selectionStart
+//        if (trigToAdd=="pi"){
+//            input_text.setText(input_text.text.insert(cursorPos,trigToAdd).toString())
+//        }
+//        else{
+//            input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
+//        }
+//        input_text.setSelection(cursorPos+trigToAdd.length)
+//    }
 }
 
