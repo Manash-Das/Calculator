@@ -47,4 +47,9 @@
     <string name="Modes">Mode</string>
     <string name="comma">,</string>
     <string name="complexMode">Complex Mode</string>
+    <string name="variable">var</string>
+    <string name="degree">deg</string>
+    <string name="Equation">Equation Solver</string>
+    <string name="Solution">solve</string>
+    <string name="Done">Done</string>
 </resources>

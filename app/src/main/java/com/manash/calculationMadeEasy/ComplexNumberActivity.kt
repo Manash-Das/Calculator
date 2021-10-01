@@ -123,7 +123,7 @@ class ComplexNumberActivity : AppCompatActivity() {
     fun conjugate(@Suppress("UNUSED_PARAMETER")view: View) { updateText("conj(") }
     fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
         input_text.setText("")
-        intent= Intent(this, MainActivity::class.java)
+        intent= Intent(this, EquationSolver::class.java)
         startActivity(intent)
     }
     fun comma(@Suppress("UNUSED_PARAMETER")view: View) { updateText(",") }

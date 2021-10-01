@@ -7,6 +7,11 @@ plugins {
 android {
     compileSdk 31
     defaultConfig {
+        python{
+            pip{
+                install "numpy"
+            }
+        }
         applicationId "com.manash.calculationmadeeasy"
         sourceSets {
             main {
@@ -43,7 +48,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     apply plugin: 'com.android.application'
     implementation files('libs/MathParser.org-mXparser-v.4.4.0-jdk11.jar')
     apply plugin: 'kotlin-android'
