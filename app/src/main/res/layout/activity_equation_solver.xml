@@ -37,7 +37,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="openBTN"
                 android:text="@string/open_bracket"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -48,7 +47,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="closeBTN"
                 android:text="@string/close_bracket"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -112,7 +110,6 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="plusBTN"
                 android:text="@string/plus"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -162,9 +159,9 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:onClick="minusBTN"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="minusBTN"
                 android:text="@string/minus"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -216,7 +213,6 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="multiplyBTN"
                 android:text="@string/multiply"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -267,7 +263,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="divideBTN"
                 android:text="@string/divide"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -297,6 +292,7 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
+                android:onClick="degree"
                 android:text="@string/degree"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -310,7 +306,20 @@
                 android:background="@drawable/circle"
                 android:backgroundTint="#4E342E"
                 android:onClick="equalBTN"
-                android:text="@string/Solution"
+                android:text="@string/equal"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+            <Button
+                android:id="@+id/polynomial"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/circle"
+                android:backgroundTint="#4E342E"
+                android:visibility="gone"
+                android:onClick="polynomialSolution"
+                android:text="@string/equal"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
         </TableRow>

@@ -1,7 +1,9 @@
 import numpy as np
+def complex(Expression):
+    return eval(Expression)
+
 def polynomial(allElement,noOfElement):
     matrix=[int(i) for i in allElement.split(",")]
-    print(matrix)
     matrix.insert(0, -1)
     lisA=[]
     lisB=[]
@@ -16,8 +18,11 @@ def polynomial(allElement,noOfElement):
     result=np.matmul(np.linalg.inv(matA),matB)
     ans=''
     for i in result:
-        ans=ans+str(i)+str(" , ")
+        ans=ans+"{:.2f}".format(i)+str(" , ")
     return ans
 
-def quadratic(coeff):
-    return np.roots(coeff)
+def degree(allElement,x):
+    matrix=[int(i) for i in allElement.split(",")]
+    coeff=np.roots(matrix)
+    ans=str(coeff)
+    return ans

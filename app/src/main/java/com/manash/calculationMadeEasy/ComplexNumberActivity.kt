@@ -18,7 +18,7 @@ class ComplexNumberActivity : AppCompatActivity() {
         input_text.showSoftInputOnFocus=false
     }
     private fun updateText(txtToAdd: String){
-        val cursorPos: Int=input_text.selectionStart                            //cursor position
+        val cursorPos: Int=input_text.selectionStart //cursor position
         input_text.setText(input_text.text.insert(cursorPos,txtToAdd).toString())
         input_text.setSelection(cursorPos+txtToAdd.length)
     }
@@ -245,7 +245,7 @@ class ComplexNumberActivity : AppCompatActivity() {
     private fun mathematicsPython(userExp: String):String{
         if(!Python.isStarted()){ Python.start(AndroidPlatform(this)) }
         val py:Python= Python.getInstance()
-        val pyObj: PyObject =py.getModule("complex function")
+        val pyObj: PyObject =py.getModule("Python file")
         val obj:PyObject=pyObj.callAttr("complex",userExp)
         return obj.toString()
     }

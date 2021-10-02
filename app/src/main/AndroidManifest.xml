@@ -13,6 +13,7 @@
         android:theme="@style/Theme.CalculationMadeEasy">
         <activity
             android:name=".EquationSolver"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ComplexNumberActivity"
