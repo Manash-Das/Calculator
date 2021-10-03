@@ -1,6 +1,7 @@
 import numpy as np
 def complex(Expression):
-    return eval(Expression)
+    ans=eval(Expression)
+    return "{:.3f}".format(ans)
 
 def polynomial(allElement,noOfElement):
     matrix=[int(i) for i in allElement.split(",")]
@@ -24,5 +25,8 @@ def polynomial(allElement,noOfElement):
 def degree(allElement,x):
     matrix=[int(i) for i in allElement.split(",")]
     coeff=np.roots(matrix)
-    ans=str(coeff)
+    ans=""
+    for i in coeff:
+        ans=ans+"{:.2f}".format(i)+str(" , ")
+
     return ans
