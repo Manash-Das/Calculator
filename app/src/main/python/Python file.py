@@ -4,8 +4,9 @@ def complex(Expression):
     return "{:.3f}".format(ans)
 
 def polynomial(allElement,noOfElement):
-    matrix=[int(i) for i in allElement.split(",")]
+    matrix=[float(i) for i in allElement.split(",")]
     matrix.insert(0, -1)
+    print(matrix)
     lisA=[]
     lisB=[]
     for i in range(1,len(matrix)):
@@ -13,14 +14,19 @@ def polynomial(allElement,noOfElement):
             lisB.append(matrix[i])
         else:
             lisA.append(matrix[i])
-    matA=np.array(lisA)
+    matA=np.array(lisA).reshape(noOfElement-1,noOfElement-1)
     matB=np.array(lisB)
-    matA=matA.reshape(noOfElement-1,noOfElement-1)
-    result=np.matmul(np.linalg.inv(matA),matB)
-    ans=''
-    for i in result:
-        ans=ans+"{:.2f}".format(i)+str(" , ")
+    try:
+        result=np.matmul(np.linalg.inv(matA),matB)
+        ans='['
+        for i in result:
+            ans=ans + str(round(i,2)) +","
+        ans=ans.strip(",")
+        ans=ans+"]"
+    except :
+        ans="Have no unique solution"
     return ans
+
 
 def degree(allElement,x):
     matrix=[int(i) for i in allElement.split(",")]

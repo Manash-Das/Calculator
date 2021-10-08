@@ -52,5 +52,9 @@
     <string name="Equation">Equation Solver</string>
     <string name="Solution">solve</string>
     <string name="Done">Done</string>
-    <string name="letters">"abcdefghijklmnopqrstuvwxyz</string>
+    <string name="letters">abcdefghijklmnopqrstuvwxyz</string>
+    <string name="sineInverse">asin</string>
+    <string name="cosInverse">acos</string>
+    <string name="tanInverse">atan</string>
+    <string name="Inverse">inv</string>
 </resources>

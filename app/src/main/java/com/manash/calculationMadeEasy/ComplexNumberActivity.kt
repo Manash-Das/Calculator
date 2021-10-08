@@ -73,15 +73,17 @@ class ComplexNumberActivity : AppCompatActivity() {
         val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
         if(leftStr.takeLast(4)=="abs(" || leftStr.takeLast(4)=="arg(" || leftStr.takeLast(4)=="pol("){
             input_text.setText(String.format("%s%s",leftStr.dropLast(4),rightStr))
+            input_text.setSelection(cursorPos-4)
             return
         }
         if(leftStr.takeLast(5)=="conj(" || leftStr.takeLast(5)=="rect(") {
             input_text.setText(String.format("%s%s", leftStr.dropLast(5), rightStr))
+            input_text.setSelection(cursorPos-5)
             return
         }
         input_text.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
         if(input_text.text.toString().isNotEmpty()) {
-            input_text.setSelection(cursorPos - 1)
+            input_text.setSelection(cursorPos-1)
         }
         else{
             input_text.setSelection(0)

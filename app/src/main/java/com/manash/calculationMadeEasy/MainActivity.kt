@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateOperator(oprToAdd:String){
         val cursorPos:Int=input_text.selectionStart
         val oldStr:String=input_text.text.toString()
+        Log.d("Cursor position update text",cursorPos.toString())
         if(oldStr.isEmpty()){
             updateText("0")
             updateText(oprToAdd)
@@ -43,54 +45,106 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    fun zeroBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("0") }
-    fun oneBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("1") }
-    fun twoBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("2") }
-    fun threeBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("3") }
-    fun fourBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("4") }
-    fun fiveBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("5") }
-    fun sixBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("6") }
-    fun sevenBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("7") }
-    fun eightBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("8") }
-    fun nineBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("9") }
-    fun pointBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText(".") }
-    fun openBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("(") }
-    fun closeBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText(")") }
-    fun powerBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("^") }
-    fun plusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("+") }
-    fun minusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("-") }
-    fun multiplyBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("*")}
-    fun divideBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("/") }
-    fun clrBTN(@Suppress("UNUSED_PARAMETER")view: View) { input_text.setText(""); answer_box.setText("") }
-    fun backspaceBTN(@Suppress("UNUSED_PARAMETER")view: View) {
+    private fun updateTrig(trigToAdd:String){
+        val cursorPos: Int=input_text.selectionStart
+        input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
+        input_text.setSelection(cursorPos+trigToAdd.length+1)
+    }
+    fun zeroBTN(view: android.view. View) {
+        updateText("0")
+    }
+    fun oneBTN(view: android.view. View) {
+        updateText("1")
+    }
+    fun twoBTN(view: android.view. View) {
+        updateText("2")
+    }
+    fun threeBTN(view: android.view. View) {
+        updateText("3")
+    }
+    fun fourBTN(view: android.view. View) {
+        updateText("4")
+    }
+    fun fiveBTN(view: android.view. View) {
+        updateText("5")
+    }
+    fun sixBTN(view: android.view. View) {
+        updateText("6")
+    }
+    fun sevenBTN(view: android.view. View) {
+        updateText("7")
+    }
+    fun eightBTN(view: android.view. View) {
+        updateText("8")
+    }
+    fun nineBTN(view: android.view. View) {
+        updateText("9")
+    }
+    fun pointBTN(view: android.view. View) {
+        updateText(".")
+    }
+    fun openBTN(view: android.view. View) {
+        updateText("(")
+    }
+    fun closeBTN(view: android.view. View) {
+        updateText(")")
+    }
+    fun powerBTN(view: android.view. View) {
+        updateOperator("^")
+    }
+    fun plusBTN(view: android.view. View) {
+        updateOperator("+")
+    }
+    fun minusBTN(view: android.view. View) {
+        updateOperator("-")
+    }
+    fun multiplyBTN(view: android.view. View) {
+        updateOperator("*")
+    }
+    fun divideBTN(view: android.view. View) {
+        updateOperator("/")
+    }
+    fun clrBTN(view: android.view. View) {
+        input_text.setText(""); answer_box.setText("")
+    }
+    fun backspaceBTN(view: android.view. View) {
         val oldStr:String =input_text.text.toString()
         val cursorPos:Int=input_text.selectionStart
+        Log.d("Before Cursor position",cursorPos.toString())
         val leftStr: String= oldStr.subSequence(0,cursorPos).toString()
+        val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
         if(leftStr.isEmpty()){
             return
         }
-        val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
-        if(leftStr.takeLast(4)=="sin(" || leftStr.takeLast(4)=="cos(" || leftStr.takeLast(4)=="tan("){
-            input_text.setText(String.format("%s%s",leftStr.dropLast(4),rightStr))
+        if(leftStr.takeLast(5)=="asin(" || leftStr.takeLast(5)=="acos(" || leftStr.takeLast(5)=="atan("){
+            input_text.setText(String.format("%s%s",leftStr.dropLast(5),rightStr))
+            input_text.setSelection(cursorPos-5)
             return
         }
-        if(leftStr.takeLast(2)=="pi") {
-            input_text.setText(String.format("%s%s", leftStr.dropLast(4), rightStr))
+        if(leftStr.takeLast(4)=="sin(" || leftStr.takeLast(4)=="cos(" || leftStr.takeLast(4)=="tan("){
+            input_text.setText(String.format("%s%s",leftStr.dropLast(4),rightStr))
+            input_text.setSelection(cursorPos - 4)
             return
         }
         if(leftStr.takeLast(3)=="ans"){
             input_text.setText(String.format("%s%s",leftStr.dropLast(3),rightStr))
+            input_text.setSelection(cursorPos - 3)
             return
         }
-        input_text.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
+        if(leftStr.takeLast(2)=="pi") {
+            input_text.setText(String.format("%s%s", leftStr.dropLast(2), rightStr))
+            input_text.setSelection(cursorPos - 2)
+            return
+        }
         if(input_text.text.toString().isNotEmpty()) {
+            input_text.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
             input_text.setSelection(cursorPos - 1)
         }
         else{
             input_text.setSelection(0)
         }
     }
-    fun equalBTN(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun equalBTN(view: android.view. View) {
         var userExp:String=input_text.text.toString()
         if(userExp.isEmpty()){ return }
         var result ="0"
@@ -122,30 +176,59 @@ class MainActivity : AppCompatActivity() {
         }
         answer_box.setText(result)
     }
-    fun percent(@Suppress("UNUSED_PARAMETER")view: View) { updateText("%") }
-    fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun percent(view: android.view. View) {
+        updateText("%")
+    }
+    fun mode(view: android.view.View) {
         val intent=Intent(this,ComplexNumberActivity::class.java)
         startActivity(intent)
     }
-    fun pie(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun pie(view: android.view.View) {
         updateText("pi")
     }
-    fun ans(@Suppress("UNUSED_PARAMETER")view: View) {
-        Toast.makeText(applicationContext,"under working",Toast.LENGTH_LONG).show()
+    fun ans(view: android.view.View) {
+        Toast.makeText(applicationContext, "under working", Toast.LENGTH_LONG).show()
         updateText("")
     }
-//    fun sin(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("sin") }
-//    fun cos(@Suppress("UNUSED_PARAMETER")view: View) { updateTrig("cos") }
-//    fun tan(@Suppress("UNUSED_PARAMETER")view: View){ updateTrig("tan") }
-//    private fun updateTrig(trigToAdd:String){
-//        val cursorPos: Int=input_text.selectionStart
-//        if (trigToAdd=="pi"){
-//            input_text.setText(input_text.text.insert(cursorPos,trigToAdd).toString())
-//        }
-//        else{
-//            input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
-//        }
-//        input_text.setSelection(cursorPos+trigToAdd.length)
-//    }
+    fun sin(view: android.view.View) {
+        updateTrig("sin")
+    }
+    fun cos(view: android.view.View) {
+        updateTrig("cos")
+    }
+    fun tan(view: android.view.View){
+        updateTrig("tan")
+    }
+    fun sinInverse(view: android.view.View) {
+        updateTrig("asin(")
+        inverse(view)
+    }
+    fun cosInverse(view: android.view.View) {
+        updateTrig("acos(")
+        inverse(view)
+    }
+    fun tanInverse(view: android.view.View) {
+        updateText(("atan("))
+        inverse(view)
+    }
+    fun inverse(view: android.view.View) {
+        if(sine.visibility==View.VISIBLE) {
+            sine.visibility = View.GONE
+            cosine.visibility = View.GONE
+            tangent.visibility = View.GONE
+            sineInverse.visibility=View.VISIBLE
+            cosineInverse.visibility=View.VISIBLE
+            tangentInverse.visibility=View.VISIBLE
+
+        }
+        else{
+            sine.visibility=View.VISIBLE
+            cosine.visibility = View.VISIBLE
+            tangent.visibility = View.VISIBLE
+            sineInverse.visibility=View.GONE
+            cosineInverse.visibility=View.GONE
+            tangentInverse.visibility=View.GONE
+        }
+    }
 }
 

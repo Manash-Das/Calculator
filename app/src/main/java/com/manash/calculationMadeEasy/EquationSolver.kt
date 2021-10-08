@@ -46,6 +46,9 @@ class EquationSolver : AppCompatActivity() {
     fun nineBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateTextEquationSolver("9") }
     fun pointBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateTextEquationSolver(".") }
     fun minusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateTextEquationSolver("-") }
+    fun plusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateTextEquationSolver("+") }
+    fun multiplyBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateTextEquationSolver("*")}
+    fun divideBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateTextEquationSolver("/") }
     fun clrBTN(@Suppress("UNUSED_PARAMETER")view: View) {
         input_text_equation_solver.setText("")
         answer_box_equation_solver.setText("")
@@ -102,7 +105,10 @@ class EquationSolver : AppCompatActivity() {
         }
         else{
             checkNoOfElement++
-            equation=equation.plus(",${answer_box_equation_solver.text}")
+            var equationSolved=mathematicsModule(answer_box_equation_solver.text.toString())
+            Log.d("equationSolved",equationSolved)
+            equation=equation.plus(",${equationSolved}")
+            Log.d("equation",equation)
             answer_box_equation_solver.setText("")
             input_text_equation_solver.setText(alphabet[index++].plus(number.toString()))
             if(index>=elements+1){
@@ -185,4 +191,6 @@ class EquationSolver : AppCompatActivity() {
         }
         return result
     }
+    fun squareRoot(view: android.view.View) { updateTextEquationSolver("sqrt(")}
+    fun closeBTN(view: android.view.View) {updateTextEquationSolver(")")}
 }

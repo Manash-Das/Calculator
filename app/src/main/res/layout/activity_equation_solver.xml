@@ -47,6 +47,7 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
+                android:onClick="closeBTN"
                 android:text="@string/close_bracket"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -108,6 +109,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:onClick="plusBTN"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/plus"
@@ -209,6 +211,7 @@
             <Button
                 android:id="@+id/multiply"
                 style="@style/Widget.AppCompat.Button.Borderless"
+                android:onClick="multiplyBTN"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -246,12 +249,13 @@
                 android:textColor="@color/white"
                 android:textSize="30sp" />
             <Button
-                android:id="@+id/comma"
+                android:id="@+id/squareRoot"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginEnd="7dp"
+                android:onClick="squareRoot"
                 android:background="@drawable/circle"
                 android:text="@string/comma"
                 android:textColor="@color/white"
@@ -259,6 +263,7 @@
             <Button
                 android:id="@+id/divide"
                 style="@style/Widget.AppCompat.Button.Borderless"
+                android:onClick="divideBTN"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -370,6 +375,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/input_text_equation_solver"
-        app:layout_constraintVertical_bias="0.7"/>
+        app:layout_constraintVertical_bias="0.7"
+        android:inputType="text"
+        tools:ignore="LabelFor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
