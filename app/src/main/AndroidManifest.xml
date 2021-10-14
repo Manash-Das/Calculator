@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalculationMadeEasy">
         <activity
-            android:name=".EquationSolver"
-            android:screenOrientation="portrait"
+            android:name=".UnitConverter"
             android:exported="true" />
+        <activity
+            android:name=".EquationSolver"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ComplexNumberActivity"
             android:exported="true"

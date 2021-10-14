@@ -57,4 +57,15 @@
     <string name="cosInverse">acos</string>
     <string name="tanInverse">atan</string>
     <string name="Inverse">inv</string>
+
+
+    <string-array name="unitConverterOption">
+        <item>Length</item>
+        <item>Time</item>
+        <item>Area</item>
+        <item>Temperature</item>
+        <item>Scientific</item>
+    </string-array>
+
+
 </resources>
