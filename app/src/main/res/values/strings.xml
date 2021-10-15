@@ -58,20 +58,47 @@
     <string name="tanInverse">atan</string>
     <string name="Inverse">inv</string>
 
-
-    <string-array name="unitConverterOption">
-        <item>Length</item>
-        <item>Time</item>
-        <item>Area</item>
-        <item>Temperature</item>
-        <item>Scientific</item>
-    </string-array>
-
     <string-array name="Menu">
         <item>Simple Mode</item>
         <item>Complex Mode</item>
         <item>Equation Mode</item>
         <item>Unit Converter Mode</item>
+
+    </string-array>
+
+    <string-array name="unitConverterOption">
+        <item>Length</item>
+        <item>Area</item>
+        <item>Binary</item>
+        <item>Temperature</item>
+        <item>Scientific</item>
+    </string-array>
+
+
+
+    <string-array name="lengthOption">
+        <item>Meter</item>
+        <item>Centimeter</item>>
+        <item>Kilometer</item>
+        <item>Mile</item>
+        <item>Millimeter</item>
+        <item>Feet</item>
+        <item>inch</item>
+    </string-array>
+    <string-array name="Area">
+        <item>acre</item>
+        <item>m<sup>2</sup></item>
+    </string-array>
+    <string-array name="temperatureOption">
+        <item>Fahrenheit</item>
+        <item>Celsius</item>
+        <item>Kelvin</item>
+    </string-array>
+
+    <string-array name="ScientificOption">
+        <item>m/sec -> km/sec</item>
+        <item>km/sec ->m/sec</item>
+        <item></item>
     </string-array>
 
 </resources>
