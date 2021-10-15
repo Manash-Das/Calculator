@@ -67,5 +67,11 @@
         <item>Scientific</item>
     </string-array>
 
+    <string-array name="Menu">
+        <item>Simple Mode</item>
+        <item>Complex Mode</item>
+        <item>Equation Mode</item>
+        <item>Unit Converter Mode</item>
+    </string-array>
 
 </resources>

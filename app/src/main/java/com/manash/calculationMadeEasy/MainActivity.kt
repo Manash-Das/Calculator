@@ -6,15 +6,61 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
 class MainActivity : AppCompatActivity() {
+    var check:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         input_text.showSoftInputOnFocus=false
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(this, R.array.Menu, android.R.layout.simple_spinner_item).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+        spinner.setSelection(0)
+
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(check){
+                    var intent:Intent
+                    Toast.makeText(this@MainActivity, "You selected ${p0?.getItemAtPosition(p2).toString()} $p2", Toast.LENGTH_LONG).show()
+                    when (p2) {
+                        0->{
+                            intent=Intent(this@MainActivity,MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        1 -> {
+                            intent = Intent(this@MainActivity, ComplexNumberActivity::class.java)
+                            startActivity(intent)
+                        }
+                        2 -> {
+                            intent = Intent(this@MainActivity, EquationSolver::class.java)
+                            startActivity(intent)
+                        }
+                        3 -> {
+                            intent = Intent(this@MainActivity, UnitConverter::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+                check=true
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
     }
     @SuppressLint("SetTextI18n")
     private fun updateText(txtToAdd: String){

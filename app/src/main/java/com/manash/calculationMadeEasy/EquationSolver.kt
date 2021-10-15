@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import kotlinx.android.synthetic.main.activity_equation_solver.*
+import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
 class EquationSolver : AppCompatActivity() {
@@ -20,10 +23,50 @@ class EquationSolver : AppCompatActivity() {
     private var equation:String=""
     private var alphabet:String="abcdefghijklmnopqrstuvwxyz"
     private var switch="None"
+    private var check=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_equation_solver)
         input_text_equation_solver.showSoftInputOnFocus=false
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(this, R.array.Menu, android.R.layout.simple_spinner_item).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinnerEquationSolver.adapter = adapter
+        }
+        spinnerEquationSolver.setSelection(2)
+
+        spinnerEquationSolver.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(check){
+                    var intent:Intent
+                    when (p2) {
+                        0->{
+                            intent=Intent(this@EquationSolver,MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        1 -> {
+                            intent = Intent(this@EquationSolver, ComplexNumberActivity::class.java)
+                            startActivity(intent)
+                        }
+                        2 -> {
+                            intent = Intent(this@EquationSolver, EquationSolver::class.java)
+                            startActivity(intent)
+                        }
+                        3 -> {
+                            intent = Intent(this@EquationSolver, UnitConverter::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+                check=true
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
     }
     @SuppressLint("SetTextI18n")
     private fun updateTextEquationSolver(txtToAdd: String){
@@ -75,10 +118,6 @@ class EquationSolver : AppCompatActivity() {
         else{
             answer_box_equation_solver.setSelection(0)
         }
-    }
-    fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
-        val intent= Intent(this,MainActivity ::class.java)
-        startActivity(intent)
     }
     @SuppressLint("SetTextI18n")
     fun varBTN(@Suppress("UNUSED_PARAMETER")view: View) {

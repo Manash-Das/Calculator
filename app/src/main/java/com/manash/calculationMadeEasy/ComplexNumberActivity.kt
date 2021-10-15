@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
@@ -12,10 +15,53 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
 class ComplexNumberActivity : AppCompatActivity() {
+    var check:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.complex_number)
         input_text.showSoftInputOnFocus=false
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(this, R.array.Menu, android.R.layout.simple_spinner_item).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+        spinner.setSelection(1)
+
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(check){
+                    var intent:Intent
+                    Toast.makeText(this@ComplexNumberActivity, "You selected ${p0?.getItemAtPosition(p2).toString()} $p2", Toast.LENGTH_LONG).show()
+                    when (p2) {
+                        0->{
+                            intent=Intent(this@ComplexNumberActivity,MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        1 -> {
+                            intent = Intent(this@ComplexNumberActivity, ComplexNumberActivity::class.java)
+                            startActivity(intent)
+                        }
+                        2 -> {
+                            intent = Intent(this@ComplexNumberActivity, EquationSolver::class.java)
+                            startActivity(intent)
+                        }
+                        3 -> {
+                            intent = Intent(this@ComplexNumberActivity, UnitConverter::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
+                check=true
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
     }
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=input_text.selectionStart //cursor position
@@ -123,11 +169,6 @@ class ComplexNumberActivity : AppCompatActivity() {
     fun absolute(@Suppress("UNUSED_PARAMETER")view: View) { updateText("abs(") }
     fun argument(@Suppress("UNUSED_PARAMETER")view: View) { updateText("arg(") }
     fun conjugate(@Suppress("UNUSED_PARAMETER")view: View) { updateText("conj(") }
-    fun mode(@Suppress("UNUSED_PARAMETER")view: View) {
-        input_text.setText("")
-        intent= Intent(this, EquationSolver::class.java)
-        startActivity(intent)
-    }
     fun comma(@Suppress("UNUSED_PARAMETER")view: View) { updateText(",") }
     private fun function2(userExp:String):String{
         var r=""
