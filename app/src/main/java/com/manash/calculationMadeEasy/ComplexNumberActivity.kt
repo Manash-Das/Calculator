@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
@@ -21,11 +20,8 @@ class ComplexNumberActivity : AppCompatActivity() {
         setContentView(R.layout.complex_number)
         input_text.showSoftInputOnFocus=false
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(this, R.array.Menu, android.R.layout.simple_spinner_item).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
         spinner.setSelection(1)
@@ -34,8 +30,7 @@ class ComplexNumberActivity : AppCompatActivity() {
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if(check){
-                    var intent:Intent
-                    Toast.makeText(this@ComplexNumberActivity, "You selected ${p0?.getItemAtPosition(p2).toString()} $p2", Toast.LENGTH_LONG).show()
+                    val intent:Intent
                     when (p2) {
                         0->{
                             intent=Intent(this@ComplexNumberActivity,MainActivity::class.java)

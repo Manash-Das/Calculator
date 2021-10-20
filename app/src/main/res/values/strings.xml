@@ -69,36 +69,98 @@
     <string-array name="unitConverterOption">
         <item>Length</item>
         <item>Area</item>
-        <item>Binary</item>
+        <item>Number system</item>
         <item>Temperature</item>
         <item>Scientific</item>
+        <item>Time</item>
+        <item>weight</item>
+        <item>Data</item>
+        <item>Angle</item>
+    </string-array>
+    <string-array name="Angle">
+        <item>deg</item>
+        <item>rad</item>
+    </string-array>
+    <string-array name="Data">
+        <item>b</item>
+        <item>kb</item>
+        <item>Mb</item>
+        <item>Gb</item>
+        <item>Tb</item>
+        <item>Pb</item>
+        <item>Eb</item>
+        <item>Zb</item>
+        <item>Yb</item>
+        <item>B</item>
+        <item>kB</item>
+        <item>MB</item>
+        <item>GB</item>
+        <item>TB</item>
+        <item>PB</item>
+        <item>EB</item>
+        <item>ZB</item>
+        <item>YB</item>
     </string-array>
 
+    <string-array name="weight">
+        <item>kg</item>
+        <item>gr</item>
+        <item>mg</item>
+        <item>dag</item>
+        <item>t</item>
+    </string-array>
 
+    <string-array name="Time">
+        <item>s</item>
+        <item>ms</item>
+        <item>min</item>
+        <item>h</item>
+        <item>day</item>
+        <item>week</item>
+        <item>year</item>
+    </string-array>
 
     <string-array name="lengthOption">
-        <item>Meter</item>
-        <item>Centimeter</item>>
-        <item>Kilometer</item>
-        <item>Mile</item>
-        <item>Millimeter</item>
-        <item>Feet</item>
+        <item>m</item>
+        <item>cm</item>>
+        <item>km</item>
+        <item>mile</item>
+        <item>mm</item>
+        <item>ft</item>
         <item>inch</item>
     </string-array>
     <string-array name="Area">
-        <item>acre</item>
+        <item>are</item>
         <item>m<sup>2</sup></item>
+        <item>cm<sup>2</sup></item>
+        <item>mm<sup>2</sup></item>
+        <item>km<sup>2</sup></item>
+        <item>ha</item>
+        <item>yard</item>
+        <item></item>
     </string-array>
     <string-array name="temperatureOption">
         <item>Fahrenheit</item>
         <item>Celsius</item>
         <item>Kelvin</item>
     </string-array>
-
-    <string-array name="ScientificOption">
-        <item>m/sec -> km/sec</item>
-        <item>km/sec ->m/sec</item>
+    <string-array name="numberSystemConverter">
+        <item>Binary</item>
+        <item>Decimal</item>
+        <item>Octal</item>
+        <item>Hexadecimal</item>
+    </string-array>
+    <string-array name="scientificOption">
+        <item>m/s </item>
+        <item>km/h</item>
+        <item>eV</item>
+        <item>keV</item>
+        <item>MeV</item>
+        <item>GeV</item>
+        <item>TeV</item>
         <item></item>
     </string-array>
+
+
 
 </resources>
