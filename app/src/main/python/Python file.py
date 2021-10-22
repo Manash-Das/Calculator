@@ -36,3 +36,18 @@ def degree(allElement,x):
         ans=ans+"{:.2f}".format(i)+str(" , ")
 
     return ans
+
+def numberSystem(fromUnit, number, toUnit):
+    try:
+        decimal=int(number,int(fromUnit))
+    except:
+        return "Invalid"
+    if toUnit=="10":
+        return str(decimal)
+    if toUnit=="2":
+        return bin(decimal)[2:]
+    if toUnit=="8":
+        return oct(decimal)[2:]
+    if toUnit=="16":
+        return hex(decimal)[2:]
+

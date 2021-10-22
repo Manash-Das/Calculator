@@ -7,6 +7,10 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import com.chaquo.python.PyObject
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_unit_converter.*
 import org.mariuszgromada.math.mxparser.Expression
@@ -54,6 +58,7 @@ class UnitConverter : AppCompatActivity() {
         }
         UnitConverterOption.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                clear()
                 if(checkOption) {
                     when (p2) {
                         0 -> {
@@ -155,7 +160,20 @@ class UnitConverter : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
-
+        firstUnit.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                clear()
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+        secondUnit.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                clear()
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
         oneUnitConverter.setOnClickListener { updateText("1") }
         twoUnitConverter.setOnClickListener { updateText("2")}
         threeUnitConverter.setOnClickListener{ updateText("3") }
@@ -179,6 +197,12 @@ class UnitConverter : AppCompatActivity() {
             else{
                 firstLabel.setSelection(0)
             }
+            if (UnitConverterOption.selectedItem.toString()=="Number system"){
+                secondLabel.text=pythonModule()
+            }
+            else {
+                secondLabel.text = mathematics()
+            }
         }
 
     }
@@ -186,11 +210,18 @@ class UnitConverter : AppCompatActivity() {
         val cursorPos: Int=firstLabel.selectionStart
         firstLabel.setText(firstLabel.text.insert(cursorPos,txtToAdd).toString())
         firstLabel.setSelection(cursorPos+txtToAdd.length)
-        val result=mathematics()
-        secondLabel.text = result
+        if (UnitConverterOption.selectedItem.toString()=="Number system"){
+            secondLabel.text=pythonModule()
+        }
+        else {
+            secondLabel.text = mathematics()
+        }
     }
     private fun mathematics(): String {
-        val number=firstLabel.text.toString()
+        val number: String = firstLabel.text.toString()
+        if (number == "") {
+            return ""
+        }
         val unitPresent=firstUnit.selectedItem
         val unitToConvert=secondUnit.selectedItem
         val userExpression="$number*[$unitPresent]/[$unitToConvert]"
@@ -226,4 +257,36 @@ class UnitConverter : AppCompatActivity() {
         }
         return result
     }
+    private fun pythonModule():String {
+        if (!Python.isStarted()) {
+            Python.start(AndroidPlatform(this))
+        }
+        val py: Python = Python.getInstance()
+        val pyObj: PyObject = py.getModule("Python file")
+
+        val number: String = firstLabel.text.toString()
+        if (number == "") {
+            return ""
+        }
+
+        val unitPresent=convertingToSpecific(firstUnit.selectedItem.toString())
+        val unitToConvert=convertingToSpecific(secondUnit.selectedItem.toString())
+        Toast.makeText(this,"$unitPresent, $unitToConvert",Toast.LENGTH_SHORT).show()
+        val obj:PyObject=pyObj.callAttr("numberSystem",unitPresent,number,unitToConvert)
+        return obj.toString()
+    }
+    private fun convertingToSpecific(Data:String):String{
+        when(Data){
+            "Binary"->return "2"
+            "Decimal"->return "10"
+            "Octal"->return "8"
+            "Hexadecimal"->return "16"
+        }
+        return ""
+    }
+    private fun clear() {
+        firstLabel.setText("")
+        secondLabel.text = ""
+    }
+
 }
