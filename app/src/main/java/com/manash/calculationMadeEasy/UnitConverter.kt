@@ -7,11 +7,9 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_unit_converter.*
 import org.mariuszgromada.math.mxparser.Expression
 
@@ -197,25 +195,15 @@ class UnitConverter : AppCompatActivity() {
             else{
                 firstLabel.setSelection(0)
             }
-            if (UnitConverterOption.selectedItem.toString()=="Number system"){
-                secondLabel.text=pythonModule()
-            }
-            else {
-                secondLabel.text = mathematics()
-            }
+            calculation()
         }
-
     }
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=firstLabel.selectionStart
         firstLabel.setText(firstLabel.text.insert(cursorPos,txtToAdd).toString())
         firstLabel.setSelection(cursorPos+txtToAdd.length)
-        if (UnitConverterOption.selectedItem.toString()=="Number system"){
-            secondLabel.text=pythonModule()
-        }
-        else {
-            secondLabel.text = mathematics()
-        }
+        calculation()
+
     }
     private fun mathematics(): String {
         val number: String = firstLabel.text.toString()
@@ -271,7 +259,6 @@ class UnitConverter : AppCompatActivity() {
 
         val unitPresent=convertingToSpecific(firstUnit.selectedItem.toString())
         val unitToConvert=convertingToSpecific(secondUnit.selectedItem.toString())
-        Toast.makeText(this,"$unitPresent, $unitToConvert",Toast.LENGTH_SHORT).show()
         val obj:PyObject=pyObj.callAttr("numberSystem",unitPresent,number,unitToConvert)
         return obj.toString()
     }
@@ -286,7 +273,43 @@ class UnitConverter : AppCompatActivity() {
     }
     private fun clear() {
         firstLabel.setText("")
-        secondLabel.text = ""
+        secondLabel.setText("")
     }
-
+    private fun calculation(){
+        when (UnitConverterOption.selectedItemId.toInt()){
+            2->secondLabel.setText(pythonModule())
+            3->secondLabel.setText(temperature())
+            else->secondLabel.setText(mathematics())
+        }
+    }
+    private fun temperature():String{
+        val inputNumber= firstLabel.text.toString()
+        if(inputNumber=="") {
+            return ""
+        }
+        val number=inputNumber.toDouble()
+        when(firstUnit.selectedItemId.toInt()){
+            0->when(secondUnit.selectedItemId.toInt()){
+                0->return number.toString()//fahrenheit to fahrenheit
+                1->return ((number-32.0)*(5.0/9.0)).toString() //fahrenheit to celsius
+                2->return ((number-32.0)*(5.0/9.0)+273.15).toString() // fahrenheit to kelvin
+            }
+            1->when(secondUnit.selectedItemId.toInt()){
+                0->return (number*(9.0/5.0)+32.0).toString()
+                1->return number.toString()
+                2->return (number+273.15).toString()
+            }
+            2->when(secondUnit.selectedItemId.toInt()){
+                0->return ((number-273.15)*(9.0/5.0)+32.0).toString()
+                1->return (number-273.15).toString()
+                2->return number.toString()
+            }
+        }
+        return ""
+    }
 }
+
+//
+//Farenheit
+//celsius
+//kelvin
