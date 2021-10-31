@@ -53,9 +53,9 @@
     <string name="Solution">solve</string>
     <string name="Done">Done</string>
     <string name="letters">abcdefghijklmnopqrstuvwxyz</string>
-    <string name="sineInverse">asin</string>
-    <string name="cosInverse">acos</string>
-    <string name="tanInverse">atan</string>
+    <string name="sineInverse">sin<sup>-1</sup></string>
+    <string name="cosInverse">cos<sup>-1</sup></string>
+    <string name="tanInverse">tan<sup>-1</sup></string>
     <string name="Inverse">inv</string>
 
     <string-array name="Menu">

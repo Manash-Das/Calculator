@@ -30,7 +30,6 @@
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/red"
-                android:onClick="clrBTN"
                 android:text="@string/clear"
                 android:textColor="@color/white"
                 android:textSize="30sp"/>
@@ -44,7 +43,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="openBTN"
                 android:text="@string/open_bracket"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -57,7 +55,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="closeBTN"
                 android:text="@string/close_bracket"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -71,7 +68,6 @@
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/green"
                 android:contentDescription="@string/backspace"
-                android:onClick="backspaceBTN"
                 android:scaleType="fitCenter"
                 android:src="@drawable/backspace"
                 app:layout_constraintRight_toRightOf="parent" />
@@ -90,7 +86,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="sin"
                 android:textAllCaps="false"
                 android:text="@string/sine"
                 android:textColor="@color/white"
@@ -103,7 +98,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="sinInverse"
                 android:textAllCaps="false"
                 android:text="@string/sineInverse"
                 android:textColor="@color/white"
@@ -119,7 +113,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="cos"
                 android:textAllCaps="false"
                 android:text="@string/cosine"
                 android:textColor="@color/white"
@@ -134,7 +127,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="cosInverse"
                 android:textAllCaps="false"
                 android:text="@string/cosInverse"
                 android:visibility="gone"
@@ -149,7 +141,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="tan"
                 android:textAllCaps="false"
                 android:text="@string/tangent"
                 android:textColor="@color/white"
@@ -164,7 +155,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="tanInverse"
                 android:visibility="gone"
                 android:textAllCaps="false"
                 android:text="@string/tanInverse"
@@ -178,7 +168,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="inverse"
                 android:text="@string/Inverse"
                 android:textSize="24sp"
                 android:textAllCaps="false"
@@ -199,7 +188,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="oneBTN"
                 android:text="@string/one"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -212,7 +200,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="twoBTN"
                 android:text="@string/two"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -225,7 +212,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="threeBTN"
                 android:text="@string/three"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -237,7 +223,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="plusBTN"
                 android:text="@string/plus"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -257,7 +242,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="fourBTN"
                 android:text="@string/four"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -270,7 +254,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="fiveBTN"
                 android:text="@string/five"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -283,7 +266,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="sixBTN"
                 android:text="@string/six"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -295,7 +277,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="minusBTN"
                 android:text="@string/minus"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -314,7 +295,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="sevenBTN"
                 android:text="@string/seven"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -327,7 +307,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="eightBTN"
                 android:text="@string/eight"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -340,7 +319,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="nineBTN"
                 android:text="@string/nine"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -352,7 +330,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="multiplyBTN"
                 android:text="@string/multiply"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -372,7 +349,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="pointBTN"
                 android:text="@string/point"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -385,7 +361,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="zeroBTN"
                 android:text="@string/zero"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -398,7 +373,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="powerBTN"
                 android:text="@string/power"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -410,7 +384,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="divideBTN"
                 android:text="@string/divide"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -430,7 +403,6 @@
                 android:layout_weight="1"
                 android:src="@drawable/pie"
                 android:background="@drawable/circle"
-                android:onClick="pie"
                 android:contentDescription="@string/pie"
                 android:scaleType="fitCenter"
                 app:tint="@color/white" />
@@ -443,7 +415,6 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="ans"
                 android:text="@string/Ans"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -457,19 +428,17 @@
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="percent"
                 android:text="@string/percent"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
             <Button
-                android:id="@+id/conjugate"
+                android:id="@+id/equal"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="equalBTN"
                 android:text="@string/equal"
                 android:textColor="@color/white"
                 android:textSize="25sp" />

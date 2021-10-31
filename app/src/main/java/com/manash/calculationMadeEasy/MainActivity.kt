@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if(check){
-                    var intent:Intent
+                    val intent:Intent
                     when (p2) {
                         0->{
                             intent=Intent(this@MainActivity,MainActivity::class.java)
@@ -56,6 +55,56 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        zero.setOnClickListener{updateText("0")}
+        one.setOnClickListener{updateText("1")}
+        two.setOnClickListener{updateText("2")}
+        three.setOnClickListener{updateText("3")}
+        four.setOnClickListener{updateText("4")}
+        five.setOnClickListener{updateText("5")}
+        six.setOnClickListener{updateText("6")}
+        seven.setOnClickListener{updateText("7")}
+        eight.setOnClickListener{updateText("8")}
+        nine.setOnClickListener{updateText("9")}
+
+        point.setOnClickListener{updateText(".")}
+        open_bracket.setOnClickListener{updateText("(")}
+        close_bracket.setOnClickListener{updateText(")")}
+        power.setOnClickListener{updateOperator("^")}
+
+        plus.setOnClickListener{updateOperator("+")}
+        minus.setOnClickListener{updateOperator("-")}
+        multiply.setOnClickListener{updateOperator("*")}
+        divide.setOnClickListener{updateOperator("/")}
+        clear.setOnClickListener{input_text.setText(""); answer_box.setText("")}
+        backspace.setOnClickListener{backspaceBTN()}
+        equal.setOnClickListener{equalBTN()}
+        percentage.setOnClickListener { updateText("%")}
+        pie.setOnClickListener { updateText("pi") }
+        sine.setOnClickListener {
+            if (sine.text=="sin"){
+                updateTrig("sin")
+            }
+            else{
+                updateTrig("asin")
+            }
+        }
+        cosine.setOnClickListener {
+            if (cosine.text == "cos") {
+                updateTrig("cos")
+            }
+            else {
+                updateTrig("acos")
+            }
+        }
+        tangent.setOnClickListener {
+            if (tangent.text == getString(R.string.tangent)){
+                updateTrig(getString(R.string.tangent))
+            }
+            else{
+                updateTrig("atan")
+            }
+        }
+        inverse.setOnClickListener {inverse()}
     }
     @SuppressLint("SetTextI18n")
     private fun updateText(txtToAdd: String){
@@ -91,64 +140,7 @@ class MainActivity : AppCompatActivity() {
         input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
         input_text.setSelection(cursorPos+trigToAdd.length+1)
     }
-    fun zeroBTN(view: android.view. View) {
-        updateText("0")
-    }
-    fun oneBTN(view: android.view. View) {
-        updateText("1")
-    }
-    fun twoBTN(view: android.view. View) {
-        updateText("2")
-    }
-    fun threeBTN(view: android.view. View) {
-        updateText("3")
-    }
-    fun fourBTN(view: android.view. View) {
-        updateText("4")
-    }
-    fun fiveBTN(view: android.view. View) {
-        updateText("5")
-    }
-    fun sixBTN(view: android.view. View) {
-        updateText("6")
-    }
-    fun sevenBTN(view: android.view. View) {
-        updateText("7")
-    }
-    fun eightBTN(view: android.view. View) {
-        updateText("8")
-    }
-    fun nineBTN(view: android.view. View) {
-        updateText("9")
-    }
-    fun pointBTN(view: android.view. View) {
-        updateText(".")
-    }
-    fun openBTN(view: android.view. View) {
-        updateText("(")
-    }
-    fun closeBTN(view: android.view. View) {
-        updateText(")")
-    }
-    fun powerBTN(view: android.view. View) {
-        updateOperator("^")
-    }
-    fun plusBTN(view: android.view. View) {
-        updateOperator("+")
-    }
-    fun minusBTN(view: android.view. View) {
-        updateOperator("-")
-    }
-    fun multiplyBTN(view: android.view. View) {
-        updateOperator("*")
-    }
-    fun divideBTN(view: android.view. View) {
-        updateOperator("/")
-    }
-    fun clrBTN(view: android.view. View) {
-        input_text.setText(""); answer_box.setText("")
-    }
-    fun backspaceBTN(view: android.view. View) {
+    private fun backspaceBTN() {
         val oldStr:String =input_text.text.toString()
         val cursorPos:Int=input_text.selectionStart
         Log.d("Before Cursor position",cursorPos.toString())
@@ -185,7 +177,7 @@ class MainActivity : AppCompatActivity() {
             input_text.setSelection(0)
         }
     }
-    fun equalBTN(view: android.view. View) {
+    private fun equalBTN() {
         var userExp:String=input_text.text.toString()
         if(userExp.isEmpty()){ return }
         var result ="0"
@@ -217,58 +209,16 @@ class MainActivity : AppCompatActivity() {
         }
         answer_box.setText(result)
     }
-    fun percent(view: android.view. View) {
-        updateText("%")
-    }
-    fun mode(view: android.view.View) {
-        val intent=Intent(this,ComplexNumberActivity::class.java)
-        startActivity(intent)
-    }
-    fun pie(view: android.view.View) {
-        updateText("pi")
-    }
-    fun ans(view: android.view.View) {
-        Toast.makeText(applicationContext, "under working", Toast.LENGTH_LONG).show()
-        updateText("")
-    }
-    fun sin(view: android.view.View) {
-        updateTrig("sin")
-    }
-    fun cos(view: android.view.View) {
-        updateTrig("cos")
-    }
-    fun tan(view: android.view.View){
-        updateTrig("tan")
-    }
-    fun sinInverse(view: android.view.View) {
-        updateTrig("asin(")
-        inverse(view)
-    }
-    fun cosInverse(view: android.view.View) {
-        updateTrig("acos(")
-        inverse(view)
-    }
-    fun tanInverse(view: android.view.View) {
-        updateText(("atan("))
-        inverse(view)
-    }
-    fun inverse(view: android.view.View) {
-        if(sine.visibility==View.VISIBLE) {
-            sine.visibility = View.GONE
-            cosine.visibility = View.GONE
-            tangent.visibility = View.GONE
-            sineInverse.visibility=View.VISIBLE
-            cosineInverse.visibility=View.VISIBLE
-            tangentInverse.visibility=View.VISIBLE
-
+    private fun inverse() {
+        if (sine.text==getString(R.string.sine)) {
+            sine.text = getString(R.string.sineInverse)
+            cosine.text = getString(R.string.cosInverse)
+            tangent.text = getString(R.string.tanInverse)
         }
         else{
-            sine.visibility=View.VISIBLE
-            cosine.visibility = View.VISIBLE
-            tangent.visibility = View.VISIBLE
-            sineInverse.visibility=View.GONE
-            cosineInverse.visibility=View.GONE
-            tangentInverse.visibility=View.GONE
+            sine.text = getString(R.string.sine)
+            cosine.text = getString(R.string.cosine)
+            tangent.text = getString(R.string.tangent)
         }
     }
 }
