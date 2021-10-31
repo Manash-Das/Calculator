@@ -1,7 +1,10 @@
 import numpy as np
 def complex(Expression):
-    ans=eval(Expression)
-    return "{:.3f}".format(ans)
+    try:
+        ans=eval(Expression)
+        return "{:.3f}".format(ans)
+    except:
+        return "syntax Error"
 
 def polynomial(allElement,noOfElement):
     matrix=[float(i) for i in allElement.split(",")]

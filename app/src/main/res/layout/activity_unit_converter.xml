@@ -44,6 +44,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginEnd="10dp"
+            android:background="@drawable/rectangular_shape"
+            android:textAlignment="center"
             android:layout_weight="1"
             android:entries="@array/lengthOption" />
 
@@ -51,6 +53,9 @@
             android:id="@+id/secondUnit"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:textAlignment="center"
+            android:background="@drawable/rectangular_shape"
+            android:minHeight="50dp"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:entries="@array/lengthOption" />
