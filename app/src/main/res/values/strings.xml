@@ -57,6 +57,12 @@
     <string name="cosInverse">cos<sup>-1</sup></string>
     <string name="tanInverse">tan<sup>-1</sup></string>
     <string name="Inverse">inv</string>
+    <string name="factorial">!</string>
+    <string name="square">x<sup>2</sup></string>
+    <string name="exponential">e</string>
+    <string name="logarithm">ln</string>
+    <string name="squareRoot">square root</string>
+    <string name="hint">0.0</string>
 
     <string-array name="Menu">
         <item>Simple Mode</item>

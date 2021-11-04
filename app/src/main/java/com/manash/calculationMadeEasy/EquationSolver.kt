@@ -23,7 +23,6 @@ class EquationSolver : AppCompatActivity() {
     private var equation:String=""
     private var alphabet:String="abcdefghijklmnopqrstuvwxyz"
     private var switch="None"
-    private var check=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_equation_solver)
@@ -40,33 +39,30 @@ class EquationSolver : AppCompatActivity() {
         spinnerEquationSolver.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(check){
-                    var intent:Intent
-                    when (p2) {
-                        0->{
-                            intent=Intent(this@EquationSolver,MainActivity::class.java)
-                            startActivity(intent)
-                        }
-                        1 -> {
-                            intent = Intent(this@EquationSolver, ComplexNumberActivity::class.java)
-                            startActivity(intent)
-                        }
-                        2 -> {
-                            intent = Intent(this@EquationSolver, EquationSolver::class.java)
-                            startActivity(intent)
-                        }
-                        3 -> {
-                            intent = Intent(this@EquationSolver, UnitConverter::class.java)
-                            startActivity(intent)
-                        }
+                var intent:Intent
+                when (p2) {
+                    0->{
+                        intent=Intent(this@EquationSolver,MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    1 -> {
+                        intent = Intent(this@EquationSolver, ComplexNumberActivity::class.java)
+                        startActivity(intent)
+                    }
+                    3 -> {
+                        intent = Intent(this@EquationSolver, UnitConverter::class.java)
+                        startActivity(intent)
                     }
                 }
-                check=true
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
         }
+    }
+    override fun onStart() {
+        super.onStart()
+        spinnerEquationSolver.setSelection(2)
     }
     @SuppressLint("SetTextI18n")
     private fun updateTextEquationSolver(txtToAdd: String){

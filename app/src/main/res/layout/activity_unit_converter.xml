@@ -62,7 +62,7 @@
     </TableRow>
 
     <EditText
-        android:id="@+id/firstLabel"
+        android:id="@+id/inputLabel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="20dp"
@@ -87,7 +87,7 @@
         android:background="@drawable/rectangular_shape"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/inputLabel" />
 
 
     <TableLayout

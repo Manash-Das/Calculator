@@ -10,16 +10,16 @@ import android.widget.ArrayAdapter
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_unit_converter.*
 import org.mariuszgromada.math.mxparser.Expression
 
 class UnitConverter : AppCompatActivity() {
-    var check:Boolean=false
     var checkOption:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unit_converter)
-        firstLabel.showSoftInputOnFocus=false
+        inputLabel.showSoftInputOnFocus=false
         ArrayAdapter.createFromResource(this,R.array.Menu,android.R.layout.simple_list_item_1).also {adapter->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerUnitConverter.adapter=adapter
@@ -28,27 +28,20 @@ class UnitConverter : AppCompatActivity() {
         spinnerUnitConverter.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(check){
-                    when (p2) {
-                        0->{
-                            val intent= Intent(this@UnitConverter,MainActivity::class.java)
-                            startActivity(intent)
-                        }
-                        1 -> {
-                            val intent = Intent(this@UnitConverter, ComplexNumberActivity::class.java)
-                            startActivity(intent)
-                        }
-                        2 -> {
-                            val intent = Intent(this@UnitConverter, EquationSolver::class.java)
-                            startActivity(intent)
-                        }
-                        3 -> {
-                            val intent = Intent(this@UnitConverter, UnitConverter::class.java)
-                            startActivity(intent)
-                        }
+                when (p2) {
+                    0->{
+                        val intent= Intent(this@UnitConverter,MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    1 -> {
+                        val intent = Intent(this@UnitConverter, ComplexNumberActivity::class.java)
+                        startActivity(intent)
+                    }
+                    2 -> {
+                        val intent = Intent(this@UnitConverter, EquationSolver::class.java)
+                        startActivity(intent)
                     }
                 }
-                check=true
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
@@ -184,29 +177,33 @@ class UnitConverter : AppCompatActivity() {
         zeroUnitConverter.setOnClickListener{updateText("0")}
         pointUnitConverter.setOnClickListener {updateText(".") }
         backspaceUnitConverter.setOnClickListener{
-            val oldStr:String =firstLabel.text.toString()
-            val cursorPos:Int=firstLabel.selectionStart
+            val oldStr:String =inputLabel.text.toString()
+            val cursorPos:Int=inputLabel.selectionStart
             val leftStr: String= oldStr.subSequence(0,cursorPos).toString()
             val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
-            if(firstLabel.text.toString().isNotEmpty()) {
-                firstLabel.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
-                firstLabel.setSelection(cursorPos - 1)
+            if(inputLabel.text.toString().isNotEmpty()) {
+                inputLabel.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
+                inputLabel.setSelection(cursorPos - 1)
             }
             else{
-                firstLabel.setSelection(0)
+                inputLabel.setSelection(0)
             }
             calculation()
         }
     }
+    override fun onStart() {
+        super.onStart()
+        spinnerUnitConverter.setSelection(3)
+    }
     private fun updateText(txtToAdd: String){
-        val cursorPos: Int=firstLabel.selectionStart
-        firstLabel.setText(firstLabel.text.insert(cursorPos,txtToAdd).toString())
-        firstLabel.setSelection(cursorPos+txtToAdd.length)
+        val cursorPos: Int=inputLabel.selectionStart
+        inputLabel.setText(inputLabel.text.insert(cursorPos,txtToAdd).toString())
+        inputLabel.setSelection(cursorPos+txtToAdd.length)
         calculation()
 
     }
     private fun mathematics(): String {
-        val number: String = firstLabel.text.toString()
+        val number: String = inputLabel.text.toString()
         if (number == "") {
             return ""
         }
@@ -252,7 +249,7 @@ class UnitConverter : AppCompatActivity() {
         val py: Python = Python.getInstance()
         val pyObj: PyObject = py.getModule("Python file")
 
-        val number: String = firstLabel.text.toString()
+        val number: String = inputLabel.text.toString()
         if (number == "") {
             return ""
         }
@@ -272,7 +269,7 @@ class UnitConverter : AppCompatActivity() {
         return ""
     }
     private fun clear() {
-        firstLabel.setText("")
+        inputLabel.setText("")
         secondLabel.setText("")
     }
     private fun calculation(){
@@ -283,7 +280,7 @@ class UnitConverter : AppCompatActivity() {
         }
     }
     private fun temperature():String{
-        val inputNumber= firstLabel.text.toString()
+        val inputNumber= inputLabel.text.toString()
         if(inputNumber=="") {
             return ""
         }

@@ -7,18 +7,20 @@
     android:background="@color/body_color"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <TableLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        app:layout_constraintVertical_bias="1"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/answer_box"
         app:layout_constraintBottom_toBottomOf="parent">
         <TableRow
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
 
             <Button
@@ -28,6 +30,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/red"
                 android:text="@string/clear"
@@ -39,6 +42,7 @@
                 android:id="@+id/open_bracket"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -51,6 +55,7 @@
                 android:id="@+id/close_bracket"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -63,6 +68,7 @@
                 android:id="@+id/backspace"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
@@ -76,7 +82,8 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_marginBottom="5dp"
-            android:layout_height="match_parent">
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <Button
                 android:id="@+id/sine"
@@ -85,24 +92,12 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="@drawable/circle"
                 android:textAllCaps="false"
                 android:text="@string/sine"
                 android:textColor="@color/white"
-                android:textSize="24sp"/>
-            <Button
-                android:id="@+id/sineInverse"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="7dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:textAllCaps="false"
-                android:text="@string/sineInverse"
-                android:textColor="@color/white"
-                android:visibility="gone"
-                android:textSize="24sp"/>
+                android:textSize="30sp"/>
 
 
             <Button
@@ -112,31 +107,19 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="@drawable/circle"
                 android:textAllCaps="false"
                 android:text="@string/cosine"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="30sp" />
 
-
-            <Button
-                android:id="@+id/cosineInverse"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="7dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:textAllCaps="false"
-                android:text="@string/cosInverse"
-                android:visibility="gone"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/tangent"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -144,32 +127,19 @@
                 android:textAllCaps="false"
                 android:text="@string/tangent"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="30sp" />
 
-
-            <Button
-                android:id="@+id/tangentInverse"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="7dp"
-                android:layout_weight="1"
-                android:background="@drawable/circle"
-                android:visibility="gone"
-                android:textAllCaps="false"
-                android:text="@string/tanInverse"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/inverse"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/Inverse"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"/>
 
@@ -184,6 +154,7 @@
                 android:id="@+id/one"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -196,6 +167,7 @@
                 android:id="@+id/two"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -208,6 +180,7 @@
                 android:id="@+id/three"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -220,6 +193,7 @@
                 android:id="@+id/plus"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
@@ -238,6 +212,7 @@
                 android:id="@+id/four"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -251,6 +226,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
@@ -262,6 +238,7 @@
                 android:id="@+id/six"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -274,6 +251,7 @@
                 android:id="@+id/minus"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
@@ -291,6 +269,7 @@
                 android:id="@+id/seven"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -303,6 +282,7 @@
                 android:id="@+id/eight"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -315,6 +295,7 @@
                 android:id="@+id/nine"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -327,6 +308,7 @@
                 android:id="@+id/multiply"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
@@ -345,6 +327,7 @@
                 android:id="@+id/point"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -357,6 +340,7 @@
                 android:id="@+id/zero"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -369,6 +353,7 @@
                 android:id="@+id/power"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -381,6 +366,7 @@
                 android:id="@+id/divide"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
@@ -391,26 +377,29 @@
         <TableRow
             android:id="@+id/tableRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1">
 
-            <ImageButton
-                android:id="@+id/pie"
+            <Button
+                android:id="@+id/exponential"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="7dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/pie"
-                android:background="@drawable/circle"
-                android:contentDescription="@string/pie"
-                android:scaleType="fitCenter"
-                app:tint="@color/white" />
+                android:layout_marginEnd="7dp"
+                android:text="@string/exponential"
+                android:textSize="30sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:background="@drawable/circle"/>
 
             <Button
                 android:id="@+id/ans"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -418,51 +407,95 @@
                 android:text="@string/Ans"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/percentage"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/percent"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="30sp" />
+            <Button
+                android:id="@+id/logarithm"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/logarithm"
+                android:textAllCaps="false"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:background="@drawable/circle"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageButton
+                android:id="@+id/pie"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="7dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/pie"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/pie"
+                android:scaleType="fitCenter"
+                app:tint="@color/white" />
+
+
+            <ImageButton
+                android:id="@+id/squareRoot"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/squareRoot"
+                android:layout_marginEnd="7dp"
+                android:src="@drawable/root"
+                android:background="@drawable/circle"/>
+
+            <Button
+                android:id="@+id/square"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/square"
+                android:textStyle="bold"
+                android:layout_marginEnd="7dp"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:background="@drawable/circle"/>
 
             <Button
                 android:id="@+id/equal"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/equal"
+                android:backgroundTint="@color/darkBlue"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
-        </TableRow>
-    </LinearLayout>
+                android:textSize="40sp" />
 
-    <EditText
-        android:id="@+id/input_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:autofillHints="true"
-        android:hint="@string/input_text_display"
-        android:inputType="none"
-        android:maxHeight="120dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textAlignment="textEnd"
-        android:textSize="36sp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
-        tools:ignore="LabelFor" />
+
+        </TableRow>
+
+
+    </TableLayout>
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
@@ -478,21 +511,38 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <EditText
+        android:id="@+id/input_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/input_text_display"
+        android:padding="5dp"
+        android:inputType="none"
+        android:textAlignment="textEnd"
+        android:layout_margin="10dp"
+        android:textSize="36sp"
+        android:scrollbars="vertical"
+        android:focusableInTouchMode="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        tools:ignore="LabelFor"
+        android:autofillHints="true" />
+    <EditText
         android:id="@+id/answer_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:autofillHints="name"
         android:background="@null"
-        android:focusable="false"
+        android:hint="@string/hint"
+        android:focusableInTouchMode="false"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
         android:inputType="number"
         android:padding="10dp"
         android:textAlignment="textEnd"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/input_text"
-        tools:layout_editor_absoluteX="0dp" />
+        android:autofillHints="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

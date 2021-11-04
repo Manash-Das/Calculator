@@ -14,49 +14,41 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
 class ComplexNumberActivity : AppCompatActivity() {
-    var check:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.complex_number)
         input_text.showSoftInputOnFocus=false
-
         ArrayAdapter.createFromResource(this, R.array.Menu, android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
         spinner.setSelection(1)
-
         spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(check){
-                    val intent:Intent
-                    when (p2) {
-                        0->{
-                            intent=Intent(this@ComplexNumberActivity,MainActivity::class.java)
-                            startActivity(intent)
-                        }
-                        1 -> {
-                            intent = Intent(this@ComplexNumberActivity, ComplexNumberActivity::class.java)
-                            startActivity(intent)
-                        }
-                        2 -> {
-                            intent = Intent(this@ComplexNumberActivity, EquationSolver::class.java)
-                            startActivity(intent)
-                        }
-                        3 -> {
-                            intent = Intent(this@ComplexNumberActivity, UnitConverter::class.java)
-                            startActivity(intent)
-                        }
+                val intent:Intent
+                when (p2) {
+                    0->{
+                        intent=Intent(this@ComplexNumberActivity,MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    2 -> {
+                        intent = Intent(this@ComplexNumberActivity, EquationSolver::class.java)
+                        startActivity(intent)
+                    }
+                    3 -> {
+                        intent = Intent(this@ComplexNumberActivity, UnitConverter::class.java)
+                        startActivity(intent)
                     }
                 }
-                check=true
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
         }
-
+    }
+    override fun onStart() {
+        super.onStart()
+        spinner.setSelection(1)
     }
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=input_text.selectionStart //cursor position
@@ -281,7 +273,6 @@ class ComplexNumberActivity : AppCompatActivity() {
         return result
     }
     private fun mathematicsPython(userExp: String):String{
-        if(!Python.isStarted()){ Python.start(AndroidPlatform(this)) }
         val py:Python= Python.getInstance()
         val pyObj: PyObject =py.getModule("Python file")
         val obj:PyObject=pyObj.callAttr("complex",userExp)
