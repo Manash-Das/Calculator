@@ -1,11 +1,9 @@
 package com.manash.calculationMadeEasy
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -21,7 +19,6 @@ class MainActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
         spinner.setSelection(0)
-
         spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -66,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         minus.setOnClickListener{updateOperator("-")}
         multiply.setOnClickListener{updateOperator("*")}
         divide.setOnClickListener{updateOperator("/")}
-        clear.setOnClickListener{input_text.setText(""); answer_box.setText("")}
+        clear.setOnClickListener{input_text.setText(""); answerBox.text=""}
         backspace.setOnClickListener{backspaceBTN()}
         equal.setOnClickListener{equalBTN()}
         percentage.setOnClickListener { updateText("%")}
@@ -105,6 +102,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         spinner.setSelection(0)
+        input_text.showSoftInputOnFocus = false
     }
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=input_text.selectionStart
@@ -211,8 +209,8 @@ class MainActivity : AppCompatActivity() {
         userExp=userExp.replace("ans",result,false)
         val exp=Expression(userExp)
         result=exp.calculate().toString()
-        if(result=="NaN"){ answer_box.setText(getString(R.string.Error)); return}
-        if(result=="Infinity"){ answer_box.setText(result); return}
+        if(result=="NaN"){ answerBox.text = getString(R.string.Error); return}
+        if(result=="Infinity"){ answerBox.text = result; return}
         if(result.length>7) {
             var check=0
             var decimal=""
@@ -234,7 +232,7 @@ class MainActivity : AppCompatActivity() {
             }
             result= "$decimal$power"
         }
-        answer_box.setText(result)
+        answerBox.text = result
     }
     private fun inverse() {
         if (sine.text==getString(R.string.sine)) {

@@ -17,16 +17,20 @@
             android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             tools:ignore="LockedOrientationActivity"
+            android:noHistory="true"
             android:exported="true" />
+
         <activity
             android:name=".EquationSolver"
             android:exported="true"
             android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
+            android:noHistory="true"
             tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".ComplexNumberActivity"
             android:exported="true"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:parentActivityName=".MainActivity"
             tools:ignore="LockedOrientationActivity" />

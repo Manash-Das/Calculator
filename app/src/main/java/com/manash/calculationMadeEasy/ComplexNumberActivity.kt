@@ -9,21 +9,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
-import com.chaquo.python.android.AndroidPlatform
-import kotlinx.android.synthetic.main.activity_main.*
-import org.mariuszgromada.math.mxparser.Expression
+import kotlinx.android.synthetic.main.complex_number.*
+import kotlin.math.*
 
 class ComplexNumberActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.complex_number)
-        input_text.showSoftInputOnFocus=false
         ArrayAdapter.createFromResource(this, R.array.Menu, android.R.layout.simple_spinner_item).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+            spinnerComplex.adapter = adapter
         }
-        spinner.setSelection(1)
-        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+        spinnerComplex.setSelection(1)
+        spinnerComplex.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 val intent:Intent
                 when (p2) {
@@ -45,19 +43,107 @@ class ComplexNumberActivity : AppCompatActivity() {
 
             }
         }
+        zeroComplex.setOnClickListener { updateText("0") }
+        oneComplex.setOnClickListener { updateText("1") }
+        twoComplex.setOnClickListener { updateText("2") }
+        threeComplex.setOnClickListener { updateText("3") }
+        fourComplex.setOnClickListener { updateText("4") }
+        fiveComplex.setOnClickListener { updateText("5") }
+        sixComplex.setOnClickListener { updateText("6") }
+        sevenComplex.setOnClickListener { updateText("7") }
+        eightComplex.setOnClickListener { updateText("8") }
+        nineComplex.setOnClickListener { updateText("9") }
+
+
+        pointComplex.setOnClickListener { updateText(".") }
+        openBracketComplex.setOnClickListener { updateText("(") }
+        closeBracketComplex.setOnClickListener { updateText(")") }
+
+        plusComplex.setOnClickListener { updateOperator("+") }
+        minusComplex.setOnClickListener { updateOperator("-") }
+        multiplyComplex.setOnClickListener { updateOperator("*") }
+        divideComplex.setOnClickListener { updateOperator("/") }
+
+        clearComplex.setOnClickListener { inputTextComplex.setText(""); answerBoxComplex.text="" }
+        backspaceComplex.setOnClickListener { backspaceBTN() }
+        equalComplex.setOnClickListener { equalBTN() }
+        imaginaryComplex.setOnClickListener { updateText("j") }
+        polarComplex.setOnClickListener { updateText("pol(") }
+
+
+        rectangularComplex.setOnClickListener { updateText("rect(") }
+        absoluteComplex.setOnClickListener { updateText("abs(") }
+        argumentComplex.setOnClickListener { updateText("arg(") }
+        conjugateComplex.setOnClickListener { updateText("conj(") }
+        commaComplex.setOnClickListener { updateText(",") }
+
     }
     override fun onStart() {
         super.onStart()
-        spinner.setSelection(1)
+        inputTextComplex.showSoftInputOnFocus=false
+        spinnerComplex.setSelection(1)
+    }
+    private fun backspaceBTN() {
+        val oldStr:String =inputTextComplex.text.toString()
+        val cursorPos:Int=inputTextComplex.selectionStart
+        val leftStr: String= oldStr.subSequence(0,cursorPos).toString()
+        if(leftStr.isEmpty()){
+            return
+        }
+        val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
+        if(leftStr.takeLast(4)=="abs(" || leftStr.takeLast(4)=="arg(" || leftStr.takeLast(4)=="pol("){
+            inputTextComplex.setText(String.format("%s%s",leftStr.dropLast(4),rightStr))
+            inputTextComplex.setSelection(cursorPos-4)
+            return
+        }
+        if(leftStr.takeLast(5)=="conj(" || leftStr.takeLast(5)=="rect(") {
+            inputTextComplex.setText(String.format("%s%s", leftStr.dropLast(5), rightStr))
+            inputTextComplex.setSelection(cursorPos-5)
+            return
+        }
+        inputTextComplex.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
+        if(inputTextComplex.text.toString().isNotEmpty()) {
+            inputTextComplex.setSelection(cursorPos-1)
+        }
+        else{
+            inputTextComplex.setSelection(0)
+        }
+    }
+    private fun equalBTN() {
+        var userExp:String=inputTextComplex.text.toString()
+        if(userExp.isEmpty()){ return }
+        if(userExp.length>4){
+            var part:String= userExp.substring(0,3)
+            if(part=="pol" || part=="abs" || part=="arg" ){
+                userExp=userExp.substring(4).dropLast(1)
+                Log.d("equal_function :","if is working")
+                answerBoxComplex.text = otherForm(part,userExp)
+                return
+            }
+            part=userExp.substring(0,4)
+            Log.d("equal_function part :",part)
+            if(part=="rect"){
+                userExp=userExp.substring(5).dropLast(1)
+                answerBoxComplex.text= rectangularForm(userExp)
+                return
+            }
+            if(part=="conj"){
+                userExp=userExp.substring(5).dropLast(1)
+                answerBoxComplex.text = otherForm(part,userExp)
+                return
+            }
+        }
+        answerBoxComplex.text = mathematicsPython(userExp)
+
     }
     private fun updateText(txtToAdd: String){
-        val cursorPos: Int=input_text.selectionStart //cursor position
-        input_text.setText(input_text.text.insert(cursorPos,txtToAdd).toString())
-        input_text.setSelection(cursorPos+txtToAdd.length)
+        val cursorPos: Int=inputTextComplex.selectionStart //cursor position
+        inputTextComplex.setText(inputTextComplex.text.insert(cursorPos,txtToAdd).toString())
+        inputTextComplex.setSelection(cursorPos+txtToAdd.length)
     }
     private fun updateOperator(oprToAdd:String){
-        val cursorPos:Int=input_text.selectionStart
-        val oldStr:String=input_text.text.toString()
+        val cursorPos:Int=inputTextComplex.selectionStart
+        val oldStr:String=inputTextComplex.text.toString()
         if(oldStr.isEmpty()){
             updateText("0")
             updateText(oprToAdd)
@@ -65,213 +151,105 @@ class ComplexNumberActivity : AppCompatActivity() {
         }
         var leftStr:String=oldStr.subSequence(0,cursorPos).toString()
         val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
-        val symbols= mutableListOf("+","-","*","/","^")
+        val symbols= mutableListOf("+","-","*","/")
         if (symbols.contains(oldStr.last().toString())){
             leftStr=leftStr.dropLast(1)
-            input_text.setText(leftStr.plus(oprToAdd.plus(rightStr)))
-            input_text.setSelection(cursorPos)
+            inputTextComplex.setText(leftStr.plus(oprToAdd.plus(rightStr)))
+            inputTextComplex.setSelection(cursorPos)
         }
         else{
-            input_text.setText(leftStr.plus(oprToAdd.plus(rightStr)))
-            input_text.setSelection(cursorPos+1)
+            inputTextComplex.setText(leftStr.plus(oprToAdd.plus(rightStr)))
+            inputTextComplex.setSelection(cursorPos+1)
         }
 
     }
-    fun zeroBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("0") }
-    fun oneBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("1") }
-    fun twoBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("2") }
-    fun threeBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("3") }
-    fun fourBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("4") }
-    fun fiveBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("5") }
-    fun sixBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("6") }
-    fun sevenBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("7") }
-    fun eightBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("8") }
-    fun nineBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("9") }
-    fun pointBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText(".") }
-    fun openBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText("(") }
-    fun closeBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateText(")") }
-    fun powerBTN(@Suppress("UNUSED_PARAMETER")view: View) { return }
-    fun plusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("+") }
-    fun minusBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("-") }
-    fun multiplyBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("*")}
-    fun divideBTN(@Suppress("UNUSED_PARAMETER")view: View) { updateOperator("/") }
-    fun clrBTN(@Suppress("UNUSED_PARAMETER")view: View) { input_text.setText(""); answer_box.setText("") }
-    fun backspaceBTN(@Suppress("UNUSED_PARAMETER")view: View) {
-        val oldStr:String =input_text.text.toString()
-        val cursorPos:Int=input_text.selectionStart
-        val leftStr: String= oldStr.subSequence(0,cursorPos).toString()
-        if(leftStr.isEmpty()){
-            return
-        }
-        val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
-        if(leftStr.takeLast(4)=="abs(" || leftStr.takeLast(4)=="arg(" || leftStr.takeLast(4)=="pol("){
-            input_text.setText(String.format("%s%s",leftStr.dropLast(4),rightStr))
-            input_text.setSelection(cursorPos-4)
-            return
-        }
-        if(leftStr.takeLast(5)=="conj(" || leftStr.takeLast(5)=="rect(") {
-            input_text.setText(String.format("%s%s", leftStr.dropLast(5), rightStr))
-            input_text.setSelection(cursorPos-5)
-            return
-        }
-        input_text.setText(String.format("%s%s",leftStr.dropLast(1),rightStr))
-        if(input_text.text.toString().isNotEmpty()) {
-            input_text.setSelection(cursorPos-1)
-        }
-        else{
-            input_text.setSelection(0)
-        }
-    }
-    fun equalBTN(@Suppress("UNUSED_PARAMETER")view: View) {
-        var userExp:String=input_text.text.toString()
-        if(userExp.isEmpty()){ return }
-        if(userExp.length>4){
-            var part:String= userExp.substring(0,3)
-            if(part=="pol" || part=="abs" || part=="arg" ){
-                userExp=userExp.substring(4).dropLast(1)
-                Log.d("equal_function :","if is working")
-                answer_box.setText(function1(part,userExp))
-                return
-            }
-            part=userExp.substring(0,4)
-            Log.d("equal_function part :",part)
-            if(part=="rect"){
-                userExp=userExp.substring(5).dropLast(1)
-                answer_box.setText(function2(userExp))
-                return
-            }
-            if(part=="conj"){
-                userExp=userExp.substring(5).dropLast(1)
-                answer_box.setText(function1(part,userExp))
-                return
-            }
-        }
-        Log.d("equal_function userExp :",userExp)
-        answer_box.setText(mathematicsPython(userExp))
-
-    }
-    fun imaginary(@Suppress("UNUSED_PARAMETER")view: View) { updateText("j") }
-    fun polar(@Suppress("UNUSED_PARAMETER")view: View) { updateText("pol(") }
-    fun rectangular(@Suppress("UNUSED_PARAMETER")view: View) { updateText("rect(") }
-    fun absolute(@Suppress("UNUSED_PARAMETER")view: View) { updateText("abs(") }
-    fun argument(@Suppress("UNUSED_PARAMETER")view: View) { updateText("arg(") }
-    fun conjugate(@Suppress("UNUSED_PARAMETER")view: View) { updateText("conj(") }
-    fun comma(@Suppress("UNUSED_PARAMETER")view: View) { updateText(",") }
-    private fun function2(userExp:String):String{
-        var r=""
+    private fun rectangularForm(userExp:String):String{
+        var radius=""
         var angle=""
         var flag=0
-        Log.d("function1 userExp",userExp)
-        for(alpha in userExp){
-            val character:String=alpha.toString()
-            if(character==","){
-                flag=1
+        if (userExp.contains('+') || userExp.contains('-') || userExp.contains('*')
+            ||userExp.contains('/')){
+            return "math Error"
+        }
+        // extracting angle and radius from user expression
+        for(character in userExp) {
+            if (character == ',') {
+                flag = 1
                 continue
             }
-            if(flag==0){
-                Log.d("alpha :", character)
-                r="$r$character"
-                Log.d("alpha",r)
-            }
-            else{
-                Log.d("alpha :", character)
-                angle="$angle$character"
-                Log.d("alpha",angle)
+            if (flag == 0) {
+                radius = "$radius$character"
+            } else {
+                angle = "$angle$character"
             }
         }
-        Log.d("final check a",r)
-        Log.d("final check b",angle)
-
-        val x=mathematicsModule("$r*cos($angle)")
-        val y= mathematicsModule("$r*sin($angle)")
-        return "$x+($y)j"
+        if(angle.isEmpty()){
+            angle ="0"
+        }
+        if(radius.isEmpty()){
+            radius = "0"
+        }
+        val x= round(radius.toFloat() * cos(angle.toFloat())*1000.0)/1000.0
+        val y= round(radius.toFloat() * sin(angle.toFloat())*1000.0)/1000.0
+        return if (y< 0){
+            "$x${y}j"
+        } else
+            "$x+${y}j"
     }
-    private fun function1(sub:String, userExp:String):String{
-        var a=""
-        var b=""
+    private fun otherForm(sub:String, userExp:String):String{
+        var real=""
+        var imaginary=""
         var flag=0
-        Log.d("function1 userExp",userExp)
-        Log.d("function1 Exp",userExp)
-        for(alpha in userExp){
-            val character:String=alpha.toString()
-            if(character=="+" || character=="-" || character=="j"){
-                if(character=="-"){
-                    flag=2
-                    continue
-                }
-                if(character=="j"){
-                    continue
-                }
-                flag=1
-                continue
-            }
+        var sign=""
+        if (userExp.contains(',')){
+            return "Math Error"
+        }
+//         extracting real and imaginary part from expression
+        for(character in userExp){
             if(flag==0){
-                Log.d("alpha :", character)
-                a="$a$character"
-                Log.d("alpha",a)
+                if (character =='+' || character =='-'){
+                    sign = character.toString()
+                    flag=1
+                    continue
+                }
+                real="$real$character"
             }
             else{
-                Log.d("alpha :", character)
-                b="$b$character"
-                Log.d("alpha",b)
+                imaginary="$imaginary$character"
             }
         }
-        Log.d("final check a",a)
-        Log.d("final check b",b)
-        var x: String
-        when(sub) {
+//        checking if imaginary is positive or negative
+        if (real.isEmpty()){
+            return "syntax Error"
+        }
+        if (imaginary.isEmpty()){
+            imaginary ="0"
+        }
+        if (imaginary.contains('j')){
+            imaginary = imaginary.replace("j","")
+        }
+        val argument = round(atan(imaginary.toFloat()/real.toFloat())*10000.0)/10000.0
+        val absolute = round(hypot(real.toFloat(), imaginary.toFloat())*10000.0)/10000.0
+        when (sub) {
             "pol" -> {
-                x = mathematicsModule("atg($b/$a)")
-                Log.d("arg = ", x)
-                val y: String = mathematicsModule("sqrt($a*$a+$b*$b)")
-                Log.d("abs", y)
-                x = "($y,$x)"
+                return "$absolute,$argument"
             }
-            "arg" -> x = mathematicsModule("atan($b/$a)")
-            "abs" -> x = mathematicsModule("sqrt($a*$a+$b*$b)")
+            "arg" -> {
+                return "$argument"
+            }
+            "abs" -> {
+                return "$absolute"
+            }
             "conj" -> {
-                Log.d("flag :", flag.toString())
-                x = if (flag == 1) {
-                    "-$b"
-                } else {
-                    "+$b"
-                }
-                x = "$a$x'j'"
+                return if (sign =="-"){
+                    "${real.toFloat()}+${imaginary}j"
+                }else
+                    "${real.toFloat()}${-imaginary.toFloat()},j"
             }
-            else -> x = "syntax Error"
+            else -> return "Syntax Error"
         }
-            return x
     }
-    private fun mathematicsModule(userExpression: String): String {
-        val exp = Expression(userExpression)
-        val result= exp.calculate().toString()
-        Log.d("result",result)
-        if(result=="Infinity"){
-            return result
-        }
-        if(result.length>7) {
-            var check=0
-            var decimal=""
-            var power=""
-            for (items in result) {
-                if (items == 'E') {
-                    check = 1
-                    power = " $power"
 
-                }
-                if (check==0) {
-                    decimal = "$decimal$items"
-                } else {
-                    power = "$power$items"
-                }
-            }
-            if(decimal.length>7) {
-                decimal = decimal.substring(0, 7)
-            }
-            return "$decimal$power"
-        }
-        return result
-    }
     private fun mathematicsPython(userExp: String):String{
         val py:Python= Python.getInstance()
         val pyObj: PyObject =py.getModule("Python file")
