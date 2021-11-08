@@ -6,33 +6,37 @@
     android:layout_height="match_parent"
     android:background="@color/body_color"
     tools:context=".EquationSolver">
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <TableLayout
+        android:id="@+id/TableLayoutEquationSolver"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="7dp"
-        android:orientation="vertical"
+        android:layout_height="400dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:layout_height="0dp">
             <Button
-                android:id="@+id/clear"
+                android:id="@+id/clearEquationSolver"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/red"
-                android:onClick="clrBTN"
                 android:text="@string/clear"
                 android:textColor="@color/white"
-                android:textSize="30sp"
-                tools:ignore="TextContrastCheck,TextContrastCheck" />
+                android:textSize="30sp"/>
             <Button
-                android:id="@+id/open_bracket"
+                android:id="@+id/openBracketEquationSolver"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
@@ -40,128 +44,142 @@
                 android:text="@string/open_bracket"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/close_bracket"
+                android:id="@+id/closeBracketEquationSolver"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="closeBTN"
                 android:text="@string/close_bracket"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
             <ImageButton
-                android:id="@+id/backspace"
+                android:id="@+id/backspaceEquationSolver"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:backgroundTint="@color/green"
                 android:contentDescription="@string/backspace"
-                android:onClick="backspaceBTN"
                 android:scaleType="fitCenter"
                 android:src="@drawable/backspace"
                 app:layout_constraintRight_toRightOf="parent" />
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginBottom="5dp">
+
             <Button
-                android:id="@+id/one"
+                android:id="@+id/oneEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="oneBTN"
                 android:text="@string/one"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/two"
+                android:id="@+id/twoEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="twoBTN"
                 android:text="@string/two"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/three"
+                android:id="@+id/threeEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="threeBTN"
                 android:text="@string/three"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/plus"
+                android:id="@+id/plusEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:onClick="plusBTN"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/plus"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginBottom="5dp">
+
             <Button
-                android:id="@+id/four"
+                android:id="@+id/fourEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="fourBTN"
                 android:text="@string/four"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/five"
+                android:id="@+id/fiveEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="fiveBTN"
                 android:text="@string/five"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/six"
+                android:id="@+id/sixEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="sixBTN"
                 android:text="@string/six"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/minus"
+                android:id="@+id/minusEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:onClick="minusBTN"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/minus"
@@ -170,100 +188,103 @@
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginBottom="5dp">
+
             <Button
-                android:id="@+id/seven"
+                android:id="@+id/sevenEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="sevenBTN"
                 android:text="@string/seven"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/eight"
+                android:id="@+id/eightEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="eightBTN"
                 android:text="@string/eight"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/nine"
+                android:id="@+id/nineEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="nineBTN"
                 android:text="@string/nine"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
             <Button
-                android:id="@+id/multiply"
+                android:id="@+id/multiplyEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:onClick="multiplyBTN"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/multiply"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
+
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginBottom="5dp">
             <Button
-                android:id="@+id/point"
+                android:id="@+id/pointEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="pointBTN"
                 android:text="@string/point"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
             <Button
-                android:id="@+id/zero"
+                android:id="@+id/zeroEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="zeroBTN"
                 android:text="@string/zero"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
             <Button
-                android:id="@+id/squareRoot"
+                android:id="@+id/squareRootEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginEnd="7dp"
-                android:onClick="squareRoot"
                 android:background="@drawable/circle"
                 android:text="@string/comma"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
             <Button
-                android:id="@+id/divide"
+                android:id="@+id/divideEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
-                android:onClick="divideBTN"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -275,9 +296,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp">
             <Button
-                android:id="@+id/absolute"
+                android:id="@+id/variableEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -285,37 +308,34 @@
                 android:layout_weight="1"
                 android:background="@drawable/circle"
                 android:text="@string/variable"
-                android:onClick="varBTN"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
             <Button
-                android:id="@+id/degree"
+                android:id="@+id/degreeEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="7dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle"
-                android:onClick="degreeBTN"
                 android:text="@string/degree"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
             <Button
-                android:id="@+id/LinearEqn"
+                android:id="@+id/LinearEqnEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@drawable/circle"
                 android:backgroundTint="#4E342E"
-                android:onClick="variableSolutionBTN"
                 android:text="@string/equal"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
             <Button
-                android:id="@+id/polynomial"
+                android:id="@+id/polynomialEquationSolver"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -323,34 +343,17 @@
                 android:background="@drawable/circle"
                 android:backgroundTint="#4E342E"
                 android:visibility="gone"
-                android:onClick="polynomialSolutionBTN"
                 android:text="@string/equal"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
         </TableRow>
-    </LinearLayout>
-    <EditText
-        android:id="@+id/input_text_equation_solver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:autofillHints="true"
-        android:inputType="none"
-        android:maxHeight="120dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textAlignment="textEnd"
-        android:textSize="36sp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerEquationSolver"
-        tools:ignore="LabelFor" />
+    </TableLayout>
     <Spinner
         android:id="@+id/spinnerEquationSolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="3dp"
         android:layout_margin="10dp"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -359,22 +362,41 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <EditText
-        android:id="@+id/answer_box_equation_solver"
+
+    <TextView
+        android:id="@+id/inputTextEquationSolver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:autofillHints="name"
-        android:background="@null"
-        android:focusable="false"
+        app:layout_constraintHeight_min="50dp"
+        app:layout_constraintHeight_max="120dp"
+        android:hint="@string/input_text_display"
+        android:padding="5dp"
+        android:textAlignment="textEnd"
+        android:maxLines="2"
+        android:layout_margin="10dp"
+        android:textSize="36sp"
+        android:scrollbars="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerEquationSolver"
+        android:autofillHints="true" />
+    <EditText
+        android:id="@+id/answerBoxEquationSolver"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:minHeight="30dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintVertical_bias="0.60"
+        android:autofillHints="true"
+        android:hint="@string/hint"
         android:padding="10dp"
         android:textAlignment="textEnd"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/input_text_equation_solver"
-        app:layout_constraintVertical_bias="0.7"
-        android:inputType="text"
-        tools:ignore="LabelFor" />
+        app:layout_constraintBottom_toTopOf="@+id/TableLayoutEquationSolver"
+        app:layout_constraintTop_toBottomOf="@+id/inputTextEquationSolver"
+        tools:layout_editor_absoluteX="10dp"
+        android:inputType="number" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

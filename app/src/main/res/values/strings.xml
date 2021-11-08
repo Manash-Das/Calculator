@@ -63,6 +63,9 @@
     <string name="logarithm">ln</string>
     <string name="squareRoot">square root</string>
     <string name="hint">0.0</string>
+    <string name="unknown">Unknowns?</string>
+    <string name="highestDegree">Highest degree?</string>
+    <string name="displayOutput">The value of variables are</string>
 
     <string-array name="Menu">
         <item>Simple Mode</item>
