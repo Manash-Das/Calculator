@@ -376,7 +376,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerComplex"
         android:labelFor="@id/TableLayout"
-        android:autofillHints="true" />
+        android:autofillHints="true"
+        android:inputType="none" />
     <Spinner
         android:id="@+id/spinnerComplex"
         android:layout_width="wrap_content"

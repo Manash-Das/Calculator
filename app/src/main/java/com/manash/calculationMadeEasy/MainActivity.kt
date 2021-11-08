@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         minus.setOnClickListener{updateOperator("-")}
         multiply.setOnClickListener{updateOperator("*")}
         divide.setOnClickListener{updateOperator("/")}
-        clear.setOnClickListener{input_text.setText(""); answerBox.text=""}
+        clear.setOnClickListener{input_text.setText(""); answerBox.text=""; input_text.textSize = 36F}
         backspace.setOnClickListener{backspaceBTN()}
         equal.setOnClickListener{equalBTN()}
         percentage.setOnClickListener { updateText("%")}
