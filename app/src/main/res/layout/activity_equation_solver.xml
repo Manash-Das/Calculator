@@ -369,7 +369,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintHeight_min="50dp"
         app:layout_constraintHeight_max="120dp"
-        android:hint="@string/input_text_display"
         android:padding="5dp"
         android:textAlignment="textEnd"
         android:maxLines="2"
@@ -397,6 +396,6 @@
         app:layout_constraintBottom_toTopOf="@+id/TableLayoutEquationSolver"
         app:layout_constraintTop_toBottomOf="@+id/inputTextEquationSolver"
         tools:layout_editor_absoluteX="10dp"
-        android:inputType="number" />
+        android:inputType="none" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
