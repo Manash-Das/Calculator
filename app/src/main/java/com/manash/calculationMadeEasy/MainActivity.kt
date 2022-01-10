@@ -3,6 +3,7 @@ package com.manash.calculationMadeEasy
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -234,23 +235,21 @@ class MainActivity : AppCompatActivity() {
         }
         answerBox.text = result
     }
-    private fun inverse() {
-        if (sine.text==getString(R.string.sine)) {
-            sine.textSize = 20F
-            cosine.textSize= 20F
-            tangent.textSize = 20F
-            sine.text = getString(R.string.sineInverse)
-            cosine.text = getString(R.string.cosInverse)
-            tangent.text = getString(R.string.tanInverse)
-        }
-        else{
-            sine.textSize = 30F
-            cosine.textSize= 30F
-            tangent.textSize = 30F
-            sine.text = getString(R.string.sine)
-            cosine.text = getString(R.string.cosine)
-            tangent.text = getString(R.string.tangent)
-        }
+    private fun inverse() = if (sine.text==getString(R.string.sine)) {
+        sine.textSize = 30F
+        cosine.textSize= 30F
+        tangent.textSize = 30F
+        sine.text = Html.fromHtml("sin<sup><small><small>-1</small></small></sup>").toString()
+        cosine.text = Html.fromHtml("cos<sup><small><small>-1</small></small></sup>").toString()
+        tangent.text =Html.fromHtml("tan<sup><small><small>-1</small></small></sup>").toString()
+    }
+    else{
+        sine.textSize = 30F
+        cosine.textSize= 30F
+        tangent.textSize = 30F
+        sine.text = getString(R.string.sine)
+        cosine.text = getString(R.string.cosine)
+        tangent.text = getString(R.string.tangent)
     }
 }
 

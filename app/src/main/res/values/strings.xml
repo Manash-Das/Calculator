@@ -28,22 +28,27 @@
     <string name="backspace">x</string>
     <string name="close_bracket">)</string>
     <string name="complex">complex Mode</string>
-    <string name="power">^</string>
+
+    <string name="power">x<sup><small><small>y</small></small></sup></string>
     <string name="input_text_display">0.0</string>
     <string name="simple_calculator">  simple Mode  </string>
     <string name="Error"> Syntax error</string>
+
     <string name="sine">sin</string>
     <string name="cosine">cos</string>
     <string name="tangent">tan</string>
+
     <string name="Ans">Ans</string>
     <string name="percent">%</string>
     <string name="pie">pie</string>
     <string name="imaginary">j</string>
+
     <string name="polar">pol(</string>
     <string name="rectangular_form">rect(</string>
     <string name="absolute">abs</string>
     <string name="argument">arg</string>
     <string name="conjugate">conj(</string>
+
     <string name="Modes">Mode</string>
     <string name="comma">,</string>
     <string name="complexMode">Complex Mode</string>
@@ -52,13 +57,14 @@
     <string name="Equation">Equation Solver</string>
     <string name="Solution">solve</string>
     <string name="Done">Done</string>
+
     <string name="letters">abcdefghijklmnopqrstuvwxyz</string>
-    <string name="sineInverse">sin<sup>-1</sup></string>
-    <string name="cosInverse">cos<sup>-1</sup></string>
-    <string name="tanInverse">tan<sup>-1</sup></string>
+    <string name="sineInverse">sin<sup><small><small>-1</small></small></sup></string>
+    <string name="cosInverse">cos<sup><small><small>-1</small></small></sup></string>
+    <string name="tanInverse">tan<sup><small><small>-1</small></small></sup></string>
     <string name="Inverse">inv</string>
     <string name="factorial">!</string>
-    <string name="square">x<sup>2</sup></string>
+    <string name="square">x<sup><small><small>2</small></small></sup></string>
     <string name="exponential">e</string>
     <string name="logarithm">ln</string>
     <string name="squareRoot">square root</string>
@@ -146,7 +152,6 @@
         <item>km<sup>2</sup></item>
         <item>ha</item>
         <item>yard</item>
-        <item></item>
     </string-array>
     <string-array name="temperatureOption">
         <item>Fahrenheit</item>
@@ -167,7 +172,6 @@
         <item>MeV</item>
         <item>GeV</item>
         <item>TeV</item>
-        <item></item>
     </string-array>
 
 
