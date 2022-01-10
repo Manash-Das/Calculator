@@ -107,11 +107,18 @@ class MainActivity : AppCompatActivity() {
     }
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=input_text.selectionStart
-        if (input_text.text.length >= 14){
-            input_text.textSize = 25F
-        }
-        if (input_text.text.length <= 14){
-            input_text.textSize = 36F
+
+        when {
+            input_text.text.length >= 30 -> {
+                input_text.textSize = 30F
+            }
+            input_text.text.length >= 10 -> {
+                input_text.textSize = 40F
+            }
+
+            else -> {
+                input_text.textSize = 60F
+            }
         }
 
         input_text.setText(input_text.text.insert(cursorPos,txtToAdd).toString())
@@ -120,11 +127,17 @@ class MainActivity : AppCompatActivity() {
     private fun updateOperator(oprToAdd:String){
         val cursorPos:Int=input_text.selectionStart
         val oldStr:String=input_text.text.toString()
-        if (input_text.text.length >= 14){
-            input_text.textSize = 25F
-        }
-        if (input_text.text.length <= 14){
-            input_text.textSize = 36F
+        when {
+
+            input_text.text.length >= 30 -> {
+                input_text.textSize = 30F
+            }
+            input_text.text.length >= 10 -> {
+                input_text.textSize = 40F
+            }
+            else -> {
+                input_text.textSize = 60F
+            }
         }
 
         Log.d("Cursor position update text",cursorPos.toString())
@@ -149,11 +162,16 @@ class MainActivity : AppCompatActivity() {
     }
     private fun updateTrig(trigToAdd:String){
         val cursorPos: Int=input_text.selectionStart
-        if (input_text.text.length >= 14){
-            input_text.textSize = 25F
-        }
-        if (input_text.text.length <= 14){
-            input_text.textSize = 36F
+        when {
+            input_text.text.length >= 30 -> {
+                input_text.textSize = 30F
+            }
+            input_text.text.length >= 10 -> {
+                input_text.textSize = 40F
+            }
+            else -> {
+                input_text.textSize = 60F
+            }
         }
 
         input_text.setText(input_text.text.insert(cursorPos,trigToAdd.plus("(")).toString())
@@ -162,11 +180,17 @@ class MainActivity : AppCompatActivity() {
     private fun backspaceBTN() {
         val oldStr:String =input_text.text.toString()
         val cursorPos:Int=input_text.selectionStart
-        if (input_text.text.length >= 14){
-            input_text.textSize = 25F
-        }
-        if (input_text.text.length <= 14){
-            input_text.textSize = 36F
+        when {
+            input_text.text.length >= 30 -> {
+                input_text.textSize = 30F
+            }
+            input_text.text.length >= 10 -> {
+                input_text.textSize = 40F
+            }
+
+            else -> {
+                input_text.textSize = 60F
+            }
         }
 
         Log.d("Before Cursor position",cursorPos.toString())

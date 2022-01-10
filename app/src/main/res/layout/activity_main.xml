@@ -12,12 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_marginBottom="10dp">
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_height="match_parent"
@@ -28,7 +30,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:layout_height="60dp"
             android:orientation="horizontal">
             <EditText
@@ -38,21 +40,20 @@
                 android:hint="@string/input_text_display"
                 android:inputType="text|textMultiLine"
                 android:background="@color/body_color"
-                android:textSize="40sp"
+                android:textSize="60sp"
                 android:scrollbars="vertical"
                 android:autofillHints="false"
                 android:gravity="bottom|end" />
         </LinearLayout>
         <LinearLayout
             android:layout_weight="2"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:layout_height="30dp">
             <TextView
                 android:id="@+id/answerBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:autofillHints="true"
-                android:hint="@string/hint"
                 android:gravity="center_vertical|end"
                 android:textSize="40sp"
                 android:textStyle="bold"/>
@@ -473,7 +474,7 @@
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:layout_height="match_parent">
             <ImageButton
                 android:id="@+id/pie"
@@ -523,8 +524,9 @@
                 android:background="@drawable/circle"
                 android:text="@string/equal"
                 android:backgroundTint="@color/darkBlue"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                android:textSize="40sp" />
+                android:textSize="30sp" />
 
 
         </TableRow>
