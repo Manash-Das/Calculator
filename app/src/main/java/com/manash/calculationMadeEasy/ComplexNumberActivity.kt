@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.complex_number.*
 import kotlin.math.*
 
@@ -138,12 +139,36 @@ class ComplexNumberActivity : AppCompatActivity() {
     }
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=inputTextComplex.selectionStart //cursor position
+        when {
+
+            inputTextComplex.text.length >= 30 -> {
+                inputTextComplex.textSize = 30F
+            }
+            inputTextComplex.text.length >= 10 -> {
+                inputTextComplex.textSize = 40F
+            }
+            else -> {
+                inputTextComplex.textSize = 60F
+            }
+        }
         inputTextComplex.setText(inputTextComplex.text.insert(cursorPos,txtToAdd).toString())
         inputTextComplex.setSelection(cursorPos+txtToAdd.length)
     }
     private fun updateOperator(oprToAdd:String){
         val cursorPos:Int=inputTextComplex.selectionStart
         val oldStr:String=inputTextComplex.text.toString()
+        when {
+
+            inputTextComplex.text.length >= 30 -> {
+                inputTextComplex.textSize = 30F
+            }
+            inputTextComplex.text.length >= 10 -> {
+                inputTextComplex.textSize = 40F
+            }
+            else -> {
+                inputTextComplex.textSize = 60F
+            }
+        }
         if(oldStr.isEmpty()){
             updateText("0")
             updateText(oprToAdd)

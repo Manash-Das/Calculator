@@ -8,21 +8,59 @@
     tools:context=".ComplexNumberActivity">
     <TableLayout
         android:id="@+id/TableLayout"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_max="400dp"
-        app:layout_constraintHeight_min="300dp"
-        app:layout_constraintVertical_bias="1"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_weight="1">
+            <Spinner
+                android:id="@+id/spinnerComplex"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/inputTextComplex"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/input_text_display"
+                android:inputType="text|textMultiLine"
+                android:background="@color/body_color"
+                android:textSize="60sp"
+                android:scrollbars="vertical"
+                android:autofillHints="false"
+                android:gravity="bottom|end" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_marginTop="25dp"
+            android:layout_height="30dp">
+            <TextView
+                android:id="@+id/answerBoxComplex"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autofillHints="true"
+                android:gravity="center_vertical|end"
+                android:textSize="40sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="50dp"
             android:layout_weight="1"
-            android:layout_marginBottom="5dp">
-            <Button
+            android:layout_height="0dp">
+        <Button
                 android:id="@+id/clearComplex"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -359,53 +397,5 @@
                 android:textSize="30sp" />
         </TableRow>
     </TableLayout>
-    <EditText
-        android:id="@+id/inputTextComplex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintHeight_min="50dp"
-        app:layout_constraintHeight_max="120dp"
-        android:hint="@string/input_text_display"
-        android:padding="5dp"
-        android:textAlignment="textEnd"
-        android:maxLines="2"
-        android:layout_margin="10dp"
-        android:textSize="36sp"
-        android:scrollbars="vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerComplex"
-        android:labelFor="@id/TableLayout"
-        android:autofillHints="true"
-        android:inputType="none" />
-    <Spinner
-        android:id="@+id/spinnerComplex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/answerBoxComplex"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:minHeight="30dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="20dp"
-        app:layout_constraintVertical_bias="0.80"
-        android:autofillHints="true"
-        android:hint="@string/hint"
-        android:padding="10dp"
-        android:textAlignment="textEnd"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/TableLayout"
-        app:layout_constraintTop_toBottomOf="@+id/inputTextComplex"
-        tools:layout_editor_absoluteX="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
