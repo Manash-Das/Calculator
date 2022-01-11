@@ -72,6 +72,9 @@
     <string name="unknown">Unknowns?</string>
     <string name="highestDegree">Highest degree?</string>
     <string name="displayOutput">The value of variables are</string>
+    <string name="output">OUTPUT</string>
+    <string name="input">INPUT</string>
+    <string name="quantity">QUANTITY</string>
 
     <string-array name="Menu">
         <item>Simple Mode</item>

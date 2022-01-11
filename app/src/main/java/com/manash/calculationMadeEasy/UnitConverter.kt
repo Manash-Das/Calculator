@@ -20,6 +20,7 @@ class UnitConverter : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unit_converter)
         inputLabel.showSoftInputOnFocus=false
+        secondLabel.showSoftInputOnFocus=false
         ArrayAdapter.createFromResource(this,R.array.Menu,android.R.layout.simple_list_item_1).also {adapter->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerUnitConverter.adapter=adapter
@@ -153,14 +154,14 @@ class UnitConverter : AppCompatActivity() {
         }
         firstUnit.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                clear()
+                calculation()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
         secondUnit.onItemSelectedListener=object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                clear()
+                calculation()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
@@ -179,6 +180,9 @@ class UnitConverter : AppCompatActivity() {
         backspaceUnitConverter.setOnClickListener{
             val oldStr:String =inputLabel.text.toString()
             val cursorPos:Int=inputLabel.selectionStart
+            if(cursorPos==0){
+                return@setOnClickListener
+            }
             val leftStr: String= oldStr.subSequence(0,cursorPos).toString()
             val rightStr:String=oldStr.subSequence(cursorPos,oldStr.length).toString()
             if(inputLabel.text.toString().isNotEmpty()) {
@@ -306,7 +310,3 @@ class UnitConverter : AppCompatActivity() {
     }
 }
 
-//
-//Farenheit
-//celsius
-//kelvin
