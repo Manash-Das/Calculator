@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
@@ -21,6 +22,7 @@ class EquationSolver : AppCompatActivity() {
     private var equation:String=""
     private var alphabet:String="abcdefghijklmnopqrstuvwxyz"
     private var switch="None"
+    private var limit = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_equation_solver)
@@ -133,11 +135,16 @@ class EquationSolver : AppCompatActivity() {
     private fun variableSolutionBTN(){
         if(checkValidity==1) {
             elements = answerBoxEquationSolver.text.toString().toInt()
+            limit = elements*(elements+1)
+            Toast.makeText(applicationContext,"$elements",Toast.LENGTH_SHORT).show()
             answerBoxEquationSolver.setText("")
             checkValidity=2
             inputTextEquationSolver.text = alphabet[index++].plus(number.toString())
         }
-        else if(checkNoOfElement==elements*(elements+1)){
+        else if(checkNoOfElement==limit-1){
+            Toast.makeText(applicationContext,"Entered last",Toast.LENGTH_SHORT).show()
+            val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
+            equation=equation.plus(",${equationSolved}")
             inputTextEquationSolver.text = equation
             equation=equation.drop(1)
             answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
@@ -145,14 +152,16 @@ class EquationSolver : AppCompatActivity() {
         else{
             checkNoOfElement++
             val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
-            Log.d("equationSolved",equationSolved)
             equation=equation.plus(",${equationSolved}")
-            Log.d("equation",equation)
             answerBoxEquationSolver.setText("")
-            inputTextEquationSolver.text= alphabet[index++].plus(number.toString())
-            if(index>=elements+1){
+            inputTextEquationSolver.text= alphabet[index].plus(number.toString())
+            Toast.makeText(applicationContext,"${index},${number},${checkNoOfElement},${limit}",Toast.LENGTH_SHORT).show()
+            if(index==elements){
                 number++
                 index=0
+            }
+            else{
+                index++
             }
         }
     }
@@ -172,22 +181,24 @@ class EquationSolver : AppCompatActivity() {
     }
     private fun degreeBTNEquationSolver() {
         inputTextEquationSolver.text= getString(R.string.highestDegree)
-        checkValidity=1
+        checkValidity = 1
         polynomialEquationSolver.isClickable=true
         polynomialEquationSolver.visibility=View.VISIBLE
         LinearEqnEquationSolver.visibility=View.GONE
-        LinearEqnEquationSolver.isClickable=false
+        LinearEqnEquationSolver.isClickable =false
         switch="degree"
     }
+
     private fun polynomialSolutionBTN() {
         when {
             checkValidity==1 -> {
-                elements = answerBoxEquationSolver.text.toString().toInt()+1
+                elements = answerBoxEquationSolver.text.toString().toInt()
                 answerBoxEquationSolver.setText("")
                 checkValidity=2
                 inputTextEquationSolver.text = alphabet[index++].plus("?")
             }
             elements==0 -> {
+                equation=equation.plus(",${answerBoxEquationSolver.text}")
                 inputTextEquationSolver.text = getString(R.string.displayOutput)
                 equation=equation.drop(1)
                 answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
