@@ -180,3 +180,60 @@
 
 
 </resources>
+
+
+
+
+<!--<string-array name="Angle">-->
+<!--<item>degree</item>-->
+<!--<item>radian</item>-->
+<!--</string-array>-->
+<!--<string-array name="Data">-->
+<!--<item>bit</item>-->
+<!--<item>kilobyte</item>-->
+<!--<item>Megabyte</item>-->
+<!--<item>Gigabyte</item>-->
+<!--<item>Terabyte</item>-->
+<!--<item>Petabyte</item>-->
+<!--<item>Bit</item>-->
+<!--<item>kiloByte</item>-->
+<!--<item>MegaByte</item>-->
+<!--<item>GigaByte</item>-->
+<!--<item>TeraByte</item>-->
+<!--</string-array>-->
+
+<!--<string-array name="weight">-->
+<!--<item>kilogram</item>-->
+<!--<item>gram</item>-->
+<!--<item>miligram</item>-->
+<!--<item>dacagram</item>-->
+<!--</string-array>-->
+
+<!--<string-array name="Time">-->
+<!--<item>second</item>-->
+<!--<item>milisecond</item>-->
+<!--<item>minute</item>-->
+<!--<item>hour</item>-->
+<!--<item>day</item>-->
+<!--<item>week</item>-->
+<!--<item>year</item>-->
+<!--</string-array>-->
+
+<!--<string-array name="lengthOption">-->
+<!--<item>meter</item>-->
+<!--<item>centimeter</item>>-->
+<!--<item>kilometer</item>-->
+<!--<item>mile</item>-->
+<!--<item>milimeter</item>-->
+<!--<item>foot</item>-->
+<!--<item>inch</item>-->
+<!--</string-array>-->
+<!--<string-array name="Area">-->
+<!--<item>are</item>-->
+<!--<item>meter<sup>2</sup></item>-->
+<!--<item>centimeter<sup>2</sup></item>-->
+<!--<item>milimeter<sup>2</sup></item>-->
+<!--<item>kilometer<sup>2</sup></item>-->
+<!--<item>hactre</item>-->
+<!--<item>yard</item>-->
+<!--</string-array>-->

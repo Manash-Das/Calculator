@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
@@ -199,13 +200,16 @@ class UnitConverter : AppCompatActivity() {
         super.onStart()
         spinnerUnitConverter.setSelection(3)
     }
+
     private fun updateText(txtToAdd: String){
         val cursorPos: Int=inputLabel.selectionStart
         inputLabel.setText(inputLabel.text.insert(cursorPos,txtToAdd).toString())
         inputLabel.setSelection(cursorPos+txtToAdd.length)
-        calculation()
-
+        if(txtToAdd != ".") {
+            calculation()
+        }
     }
+
     private fun mathematics(): String {
         val number: String = inputLabel.text.toString()
         if (number == "") {
