@@ -11,6 +11,7 @@ import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import kotlinx.android.synthetic.main.activity_equation_solver.*
+import kotlinx.android.synthetic.main.activity_main.*
 import org.mariuszgromada.math.mxparser.Expression
 
 class EquationSolver : AppCompatActivity() {
@@ -80,10 +81,10 @@ class EquationSolver : AppCompatActivity() {
         backspaceEquationSolver.setOnClickListener{backspaceBTNEquationSolver()}
         clearEquationSolver.setOnClickListener { clrBTNEquationSolver() }
 
-        variableEquationSolver.setOnClickListener { varBTNEquationSolver() }
-        degreeEquationSolver.setOnClickListener { degreeBTNEquationSolver() }
-        polynomialEquationSolver.setOnClickListener { polynomialSolutionBTN() }
-        LinearEqnEquationSolver.setOnClickListener { variableSolutionBTN() }
+        variableEquationSolver.setOnClickListener { answerBoxEquationSolver.textSize = 60F; varBTNEquationSolver() }
+        degreeEquationSolver.setOnClickListener { answerBoxEquationSolver.textSize = 60F; degreeBTNEquationSolver() }
+        polynomialEquationSolver.setOnClickListener { answerBoxEquationSolver.textSize = 60F; polynomialSolutionBTN() }
+        LinearEqnEquationSolver.setOnClickListener { answerBoxEquationSolver.textSize = 60F;variableSolutionBTN() }
     }
     override fun onStart() {
         super.onStart()
@@ -106,6 +107,7 @@ class EquationSolver : AppCompatActivity() {
         index=0
         equation=""
         switch="None"
+        answerBoxEquationSolver.textSize = 60F
     }
     private fun backspaceBTNEquationSolver() {
         val oldStr:String =answerBoxEquationSolver.text.toString()
@@ -142,11 +144,11 @@ class EquationSolver : AppCompatActivity() {
             inputTextEquationSolver.text = alphabet[index++].plus(number.toString())
         }
         else if(checkNoOfElement==limit-1){
-            Toast.makeText(applicationContext,"Entered last",Toast.LENGTH_SHORT).show()
             val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
-            equation=equation.plus(",${equationSolved}")
-            inputTextEquationSolver.text = equation
+            equation=equation.plus(",$equationSolved")
+//            inputTextEquationSolver.text = "Solution is "
             equation=equation.drop(1)
+            answerBoxEquationSolver.textSize = 30F
             answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
         }
         else{
@@ -155,7 +157,7 @@ class EquationSolver : AppCompatActivity() {
             equation=equation.plus(",${equationSolved}")
             answerBoxEquationSolver.setText("")
             inputTextEquationSolver.text= alphabet[index].plus(number.toString())
-            Toast.makeText(applicationContext,"${index},${number},${checkNoOfElement},${limit}",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(applicationContext,"${index},${number},${checkNoOfElement},${limit}",Toast.LENGTH_SHORT).show()
             if(index==elements){
                 number++
                 index=0
@@ -200,6 +202,7 @@ class EquationSolver : AppCompatActivity() {
             elements==0 -> {
                 equation=equation.plus(",${answerBoxEquationSolver.text}")
                 inputTextEquationSolver.text = getString(R.string.displayOutput)
+                answerBoxEquationSolver.textSize = 30F
                 equation=equation.drop(1)
                 answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
             }

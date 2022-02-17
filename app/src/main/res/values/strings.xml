@@ -182,12 +182,11 @@
 </resources>
 
 
-
-
 <!--<string-array name="Angle">-->
 <!--<item>degree</item>-->
 <!--<item>radian</item>-->
 <!--</string-array>-->
+
 <!--<string-array name="Data">-->
 <!--<item>bit</item>-->
 <!--<item>kilobyte</item>-->
@@ -195,6 +194,7 @@
 <!--<item>Gigabyte</item>-->
 <!--<item>Terabyte</item>-->
 <!--<item>Petabyte</item>-->
+
 <!--<item>Bit</item>-->
 <!--<item>kiloByte</item>-->
 <!--<item>MegaByte</item>-->
@@ -228,6 +228,7 @@
 <!--<item>foot</item>-->
 <!--<item>inch</item>-->
 <!--</string-array>-->
+
 <!--<string-array name="Area">-->
 <!--<item>are</item>-->
 <!--<item>meter<sup>2</sup></item>-->
