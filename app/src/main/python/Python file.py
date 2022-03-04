@@ -19,6 +19,8 @@ def polynomial(allElement,noOfElement):
             lisA.append(matrix[i])
     matA=np.array(lisA).reshape(noOfElement-1,noOfElement-1)
     matB=np.array(lisB)
+    if np.allclose(np.linalg.det(matA),0):
+        return "No possible solution"
     try:
         result=np.matmul(np.linalg.inv(matA),matB)
         ans='['
@@ -32,12 +34,15 @@ def polynomial(allElement,noOfElement):
 
 
 def degree(allElement,x):
-    matrix=[int(i) for i in allElement.split(",")]
-    coeff=np.roots(matrix)
-    ans=""
-    for i in coeff:
-        ans=ans+"{:.2f}".format(i)+str(" , ")
-
+    # allElement = "1.0,2.0,3.0"
+    matrix=[float(i) for i in allElement.split(",")]
+    try:
+        coeff=np.roots(matrix)
+        ans =""
+        for i in coeff:
+            ans=ans + str(round(i,2)) +","
+    except:
+        ans = "Not possible"
     return ans
 
 def numberSystem(fromUnit, number, toUnit):

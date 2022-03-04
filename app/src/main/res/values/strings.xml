@@ -75,6 +75,8 @@
     <string name="output">OUTPUT</string>
     <string name="input">INPUT</string>
     <string name="quantity">QUANTITY</string>
+    <string name="up_arrow_des">up_arrow</string>
+    <string name="down_arrow_des">down_arrow_des</string>
 
     <string-array name="Menu">
         <item>Simple Mode</item>

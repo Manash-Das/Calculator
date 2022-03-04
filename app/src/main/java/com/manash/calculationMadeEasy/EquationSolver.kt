@@ -19,11 +19,11 @@ class EquationSolver : AppCompatActivity() {
     private var elements:Int = 0
     private var checkNoOfElement:Int=0
     private var number=1
-    private var index=0
-    private var equation:String=""
+    private var index=-1
     private var alphabet:String="abcdefghijklmnopqrstuvwxyz"
     private var switch="None"
     private var limit = 0
+    private var inputList = mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_equation_solver)
@@ -80,6 +80,8 @@ class EquationSolver : AppCompatActivity() {
         divideEquationSolver.setOnClickListener{updateTextEquationSolver("/")}
         backspaceEquationSolver.setOnClickListener{backspaceBTNEquationSolver()}
         clearEquationSolver.setOnClickListener { clrBTNEquationSolver() }
+        arrow_up.setOnClickListener { arrowUpButton() }
+        arrow_down.setOnClickListener { arrowDownButton() }
 
         variableEquationSolver.setOnClickListener { answerBoxEquationSolver.textSize = 60F; varBTNEquationSolver() }
         degreeEquationSolver.setOnClickListener { answerBoxEquationSolver.textSize = 60F; degreeBTNEquationSolver() }
@@ -104,10 +106,11 @@ class EquationSolver : AppCompatActivity() {
         elements= 0
         checkNoOfElement=0
         number=1
-        index=0
-        equation=""
+        index=-1
         switch="None"
+        limit = 0
         answerBoxEquationSolver.textSize = 60F
+        inputList.clear()
     }
     private fun backspaceBTNEquationSolver() {
         val oldStr:String =answerBoxEquationSolver.text.toString()
@@ -125,7 +128,9 @@ class EquationSolver : AppCompatActivity() {
             answerBoxEquationSolver.setSelection(0)
         }
     }
+    //controls all button needed for solution of variable
     private fun varBTNEquationSolver() {
+        inputList.clear()
         inputTextEquationSolver.text = getString(R.string.unknown)
         checkValidity=1
         polynomialEquationSolver.isClickable=false
@@ -134,36 +139,58 @@ class EquationSolver : AppCompatActivity() {
         LinearEqnEquationSolver.isClickable=true
         switch="variable"
     }
+    //performs solution for polynomial equation
     private fun variableSolutionBTN(){
-        if(checkValidity==1) {
-            elements = answerBoxEquationSolver.text.toString().toInt()
-            limit = elements*(elements+1)
-            Toast.makeText(applicationContext,"$elements",Toast.LENGTH_SHORT).show()
-            answerBoxEquationSolver.setText("")
-            checkValidity=2
-            inputTextEquationSolver.text = alphabet[index++].plus(number.toString())
-        }
-        else if(checkNoOfElement==limit-1){
-            val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
-            equation=equation.plus(",$equationSolved")
-//            inputTextEquationSolver.text = "Solution is "
-            equation=equation.drop(1)
-            answerBoxEquationSolver.textSize = 30F
-            answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
-        }
-        else{
-            checkNoOfElement++
-            val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
-            equation=equation.plus(",${equationSolved}")
-            answerBoxEquationSolver.setText("")
-            inputTextEquationSolver.text= alphabet[index].plus(number.toString())
-//            Toast.makeText(applicationContext,"${index},${number},${checkNoOfElement},${limit}",Toast.LENGTH_SHORT).show()
-            if(index==elements){
-                number++
-                index=0
+        when {
+            checkValidity==1 -> {
+                elements = answerBoxEquationSolver.text.toString().toInt()
+                if (elements >26){
+                    Toast.makeText(applicationContext,"maximum limit 26",Toast.LENGTH_LONG).show()
+                    varBTNEquationSolver()
+                    return
+                }
+                limit = elements*(elements+1)
+                answerBoxEquationSolver.setText("")
+                checkValidity=2
+                inputTextEquationSolver.text = alphabet[++index].plus("$number")
             }
-            else{
-                index++
+            limit-1 <= (number - 1) * (elements + 1) + index -> {
+                LinearEqnEquationSolver.isClickable = false
+                val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
+                try {
+                    inputList[(number - 1) * (elements + 1) + index] = equationSolved
+                }catch (e:IndexOutOfBoundsException){
+                    inputList.add(((number - 1) * (elements + 1) + index), equationSolved)
+                }
+
+                answerBoxEquationSolver.textSize = 40F
+                var equation =""
+                for(items in inputList){
+                    equation = equation.plus(",$items")
+                }
+                equation=equation.drop(1)
+                answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
+            }
+            else -> {
+                arrow_up.isClickable = true
+                arrow_down.isClickable = true
+                val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
+                try {
+                    inputList[(number - 1) * (elements + 1) + index] = equationSolved
+                }catch (e:IndexOutOfBoundsException){
+                    inputList.add(((number - 1) * (elements + 1) + index), equationSolved)
+                }
+                try{
+                    answerBoxEquationSolver.setText(inputList[(number - 1) * (elements + 1) + index+1])
+                }catch (e:IndexOutOfBoundsException){
+                    answerBoxEquationSolver.setText("")
+                }
+                if(index==elements){
+                    number++
+                    index=-1
+                }
+                inputTextEquationSolver.text = alphabet[++index].plus("$number")
+                checkNoOfElement = inputList.size
             }
         }
     }
@@ -173,11 +200,9 @@ class EquationSolver : AppCompatActivity() {
         val pyObj: PyObject =py.getModule("Python file")
         return if(switch=="variable") {
             val obj: PyObject = pyObj.callAttr("polynomial", userExp, noOfElement)
-            Log.d("python", obj.toString())
             obj.toString()
         } else{
             val obj: PyObject = pyObj.callAttr("degree", userExp, noOfElement)
-            Log.d("python", obj.toString())
             obj.toString()
         }
     }
@@ -189,30 +214,80 @@ class EquationSolver : AppCompatActivity() {
         LinearEqnEquationSolver.visibility=View.GONE
         LinearEqnEquationSolver.isClickable =false
         switch="degree"
+        inputList.clear()
     }
-
     private fun polynomialSolutionBTN() {
         when {
             checkValidity==1 -> {
                 elements = answerBoxEquationSolver.text.toString().toInt()
+                limit = elements+1
                 answerBoxEquationSolver.setText("")
                 checkValidity=2
-                inputTextEquationSolver.text = alphabet[index++].plus("?")
+                inputTextEquationSolver.text = alphabet[++index].plus("$number")
             }
-            elements==0 -> {
-                equation=equation.plus(",${answerBoxEquationSolver.text}")
-                inputTextEquationSolver.text = getString(R.string.displayOutput)
-                answerBoxEquationSolver.textSize = 30F
+            limit-1 <= (number - 1) * (elements + 1) + index -> {
+                polynomialEquationSolver.isClickable = false
+                val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
+                try {
+                    inputList[(number - 1) * (elements + 1) + index] = equationSolved
+                }catch (e:IndexOutOfBoundsException){
+                    inputList.add(((number - 1) * (elements + 1) + index), equationSolved)
+                }
+
+                answerBoxEquationSolver.textSize = 40F
+                var equation =""
+                for(items in inputList){
+                    equation = equation.plus(",$items")
+                    Toast.makeText(applicationContext, equation,Toast.LENGTH_SHORT).show()
+                }
                 equation=equation.drop(1)
                 answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
             }
             else -> {
-                elements--
-                equation=equation.plus(",${answerBoxEquationSolver.text}")
-                answerBoxEquationSolver.setText("")
-                inputTextEquationSolver.text = alphabet[index++].plus("?")
+                arrow_up.isClickable = true
+                arrow_down.isClickable = true
+                val equationSolved=mathematicsModule(answerBoxEquationSolver.text.toString())
+                try {
+                    inputList[(number - 1) * (elements + 1) + index] = equationSolved
+                }catch (e:IndexOutOfBoundsException){
+                    inputList.add(((number - 1) * (elements + 1) + index), equationSolved)
+                }
+                try{
+                    answerBoxEquationSolver.setText(inputList[(number - 1) * (elements + 1) + index+1])
+                }catch (e:IndexOutOfBoundsException){
+                    answerBoxEquationSolver.setText("")
+                }
+                if(index==elements){
+                    number++
+                    index=-1
+                }
+                inputTextEquationSolver.text = alphabet[++index].plus("$number")
+                checkNoOfElement = inputList.size
             }
         }
+
+//        var equation =""
+//        when {
+//            checkValidity==1 -> {
+//                elements = answerBoxEquationSolver.text.toString().toInt()
+//                answerBoxEquationSolver.setText("")
+//                checkValidity=2
+//                inputTextEquationSolver.text = alphabet[index++].plus("?")
+//            }
+//            elements==0 -> {
+//                equation=equation.plus(",${answerBoxEquationSolver.text}")
+//                inputTextEquationSolver.text = getString(R.string.displayOutput)
+//                answerBoxEquationSolver.textSize = 30F
+//                equation=equation.drop(1)
+//                answerBoxEquationSolver.setText(mathematicsPython(equation,elements+1))
+//            }
+//            else -> {
+//                elements--
+//                equation=equation.plus(",${answerBoxEquationSolver.text}")
+//                answerBoxEquationSolver.setText("")
+//                inputTextEquationSolver.text = alphabet[index++].plus("?")
+//            }
+//        }
     }
     private fun mathematicsModule(userExpression: String): String {
         val exp = Expression(userExpression)
@@ -244,4 +319,55 @@ class EquationSolver : AppCompatActivity() {
         }
         return result
     }
+    private fun arrowUpButton(){
+        LinearEqnEquationSolver.isClickable = true
+        Toast.makeText(applicationContext,"($number, $index, ${(number - 1) * (elements + 1) + index}, $elements)",Toast.LENGTH_SHORT).show()
+        if(index == 0){
+            if(number ==1){
+                return
+            }
+            index = elements
+            number--
+        }
+        else{
+            index--
+        }
+        inputTextEquationSolver.text= alphabet[index].plus(number.toString())
+        answerBoxEquationSolver.setText(inputList[(number-1)*(elements+1)+index])
+    }
+    private fun arrowDownButton(){
+        Toast.makeText(applicationContext,"${(number-1)*(elements+1)+index},${inputList.size}",Toast.LENGTH_SHORT).show()
+        if(inputList.size <= (number-1)*(elements+1)+index+1){
+            return
+        }
+        if(index == elements){
+            index = 0
+            number++
+        }
+        else{
+            index++
+        }
+        inputTextEquationSolver.text= alphabet[index].plus(number.toString())
+        answerBoxEquationSolver.setText(inputList[(number-1)*(elements+1)+index])
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
